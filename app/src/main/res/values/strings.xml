@@ -1,0 +1,70 @@
+<resources>
+    <string name="app_name">NewDriver</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="provider_name_email">Email...</string>
+    <string name="phone_hint">Phone Number...</string>
+
+
+    <string name="default_notification_channel_id">0</string>
+
+    <string-array name="teacherStudent">
+        <item> Teacher/Student ?</item>
+        <item>Teacher</item>
+        <item>Student</item>
+    </string-array>
+
+    <string-array name="payment">
+        <item>Payment ?</item>
+        <item>Credit Card</item>
+        <item>Bank</item>
+        <item>Cash</item>
+        <item>Check</item>
+        <item>PayPal</item>
+    </string-array>
+
+
+    <string-array name="city">
+        <item> where in the city ?</item>
+        <item>center</item>
+        <item>west</item>
+        <item>north</item>
+        <item></item>
+    </string-array>
+
+    <string-array name="gearBox">
+        <item>Gear Box?</item>
+        <item>Manual</item>
+        <item>Automatic</item>
+    </string-array>
+
+    <string-array name="catigories">
+        <item>Vehicle Category ?</item>
+        <item>1</item>
+        <item>A</item>
+        <item>A1</item>
+        <item>A2</item>
+        <item>B</item>
+        <item>C</item>
+        <item>C1</item>
+        <item>D</item>
+        <item>D1</item>
+        <item>D2</item>
+        <item>D3</item>
+        <item>E</item>
+        <item>1</item>
+    </string-array>
+    <string-array name="deal">
+        <item>Deal?</item>
+        <item>Pay per lesson</item>
+        <item>Global payment</item>
+    </string-array>
+    <string name="title_activity_teacher_day">TeacherDay</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+</resources>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_Teaching_Area"
+            android:icon="@drawable/icons8_marker"
+            android:title="Teaching Area" />
+        <item
+            android:id="@+id/nav_my_classes"
+            android:icon="@drawable/icons8_to_do_filled"
+            android:title="My classes" />
+        <item
+            android:id="@+id/nav_teachers"
+            android:icon="@drawable/icons8_training"
+            android:title="Teachers" />
+        <item
+            android:id="@+id/nav_teacher_scedule"
+            android:icon="@drawable/icons8_overtime_filled"
+            android:title="Teacher Schedule" />
+        <item
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/icons8_wedding_day"
+            android:title="Sign up for calss" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/icons8_user"
+            android:title="My Profile" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Send" />
+        </menu>
+    </item>
+
+</menu>

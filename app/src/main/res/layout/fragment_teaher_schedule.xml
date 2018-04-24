@@ -1,0 +1,384 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="layout.TeacherSchedule">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/tvMonDAy"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Monday"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/tvSunDay"
+        app:layout_constraintRight_toRightOf="@+id/tvSunDay"
+        app:layout_constraintTop_toBottomOf="@+id/tvSunDay" />
+
+    <TextView
+        android:id="@+id/tvSunDay"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="32dp"
+        android:text="Sunday"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline6"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tvTusDay"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Tuesday"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/tvMonDAy"
+        app:layout_constraintRight_toRightOf="@+id/tvMonDAy"
+        app:layout_constraintTop_toBottomOf="@+id/tvMonDAy" />
+
+    <TextView
+        android:id="@+id/tvWeDay"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Wednesday"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/tvTusDay"
+        app:layout_constraintRight_toRightOf="@+id/tvTusDay"
+        app:layout_constraintTop_toBottomOf="@+id/tvTusDay" />
+
+    <TextView
+        android:id="@+id/tvThuDay"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="32dp"
+        android:text="Thursday"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="@+id/tvWeDay"
+        app:layout_constraintRight_toRightOf="@+id/tvWeDay"
+        app:layout_constraintTop_toBottomOf="@+id/tvWeDay" />
+
+    <TextView
+        android:id="@+id/tvSatDay"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Saturday"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/tvFrDay"
+        app:layout_constraintRight_toRightOf="@+id/tvFrDay"
+        app:layout_constraintTop_toBottomOf="@+id/tvFrDay"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tvFrDay"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Friday"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/tvThuDay"
+        app:layout_constraintRight_toRightOf="@+id/tvThuDay"
+        app:layout_constraintTop_toBottomOf="@+id/tvThuDay" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline6"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline7"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.45" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline8"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.72" />
+
+    <TextView
+        android:id="@+id/tcSunStart"
+        android:onClick="test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="Start"
+        android:text="00:00"
+        android:focusable="false"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSunDay"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline7"
+        app:layout_constraintRight_toLeftOf="@+id/guideline8"
+        app:layout_constraintTop_toTopOf="@+id/tvSunDay"
+        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.516" />
+
+    <TextView
+        android:id="@+id/tcSunEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="-4dp"
+        android:hint="End"
+        android:text="00:00"
+        app:layout_constraintBottom_toBottomOf="@+id/tcSunStart"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline8"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tcSunStart"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tcMonStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-1dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:hint="Start"
+        android:text="00:00"
+        app:layout_constraintBottom_toBottomOf="@+id/tvMonDAy"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline7"
+        app:layout_constraintRight_toLeftOf="@+id/guideline8" />
+
+    <TextView
+        android:id="@+id/tcMonEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:hint="End"
+        android:text="00:00"
+        app:layout_constraintBottom_toBottomOf="@+id/tcMonStart"
+        app:layout_constraintHorizontal_bias="0.625"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline8"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tcMonStart"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/tcTuStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="Start1"
+        android:text="00:00"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTusDay"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline7"
+        app:layout_constraintRight_toLeftOf="@+id/guideline8"
+        app:layout_constraintTop_toTopOf="@+id/tvTusDay"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/tcTuEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="End"
+        android:text="00:00"
+        app:layout_constraintBottom_toBottomOf="@+id/tcTuStart"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline8"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tcTuStart"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/tcWeStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="Start"
+        android:text="00:00"
+        app:layout_constraintBottom_toBottomOf="@+id/tvWeDay"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline7"
+        app:layout_constraintRight_toLeftOf="@+id/guideline8"
+        app:layout_constraintTop_toTopOf="@+id/tvWeDay"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/tcWeEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="End"
+        android:text="00:00"
+        app:layout_constraintBottom_toBottomOf="@+id/tcWeStart"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline8"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tcWeStart"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/tcThuStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="Start"
+        android:text="00:00"
+        app:layout_constraintBottom_toBottomOf="@+id/tvThuDay"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline7"
+        app:layout_constraintRight_toLeftOf="@+id/guideline8"
+        app:layout_constraintTop_toTopOf="@+id/tvThuDay"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/tcThuEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="End"
+        android:text="00:00"
+        app:layout_constraintBottom_toBottomOf="@+id/tcThuStart"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline8"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tcThuStart"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/tcFriStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="Start"
+        android:text="00:00"
+        app:layout_constraintBottom_toBottomOf="@+id/tvFrDay"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline7"
+        app:layout_constraintRight_toLeftOf="@+id/guideline8"
+        app:layout_constraintTop_toTopOf="@+id/tvFrDay"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/tcFriEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="End"
+        android:text="00:00"
+        app:layout_constraintBottom_toBottomOf="@+id/tcFriStart"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline8"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tcFriStart"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/tcSatStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="Start"
+        android:text="00:00"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSatDay"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline7"
+        app:layout_constraintRight_toLeftOf="@+id/guideline8"
+        app:layout_constraintTop_toTopOf="@+id/tvSatDay"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/tcSatEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="End"
+        android:text="00:00"
+        app:layout_constraintBottom_toBottomOf="@+id/tcSatStart"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline8"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tcSatStart"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnSetAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="3dp"
+        android:text="Set All"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.916"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SAVE"
+        app:layout_constraintRight_toLeftOf="@+id/btnSetAll"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvSatDay"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintVertical_bias="0.712" />
+
+</android.support.constraint.ConstraintLayout>

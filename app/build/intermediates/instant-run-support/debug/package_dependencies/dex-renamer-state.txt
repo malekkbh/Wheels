@@ -1,0 +1,4 @@
+#Mon Apr 16 14:50:47 IDT 2018
+base.0=/Users/malekkbh/Desktop/untitled folder/NewDriver/app/build/intermediates/transforms/dexMerger/debug/10
+path.0=classes.dex
+renamed.0=classes.dex

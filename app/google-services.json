@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "167257653983",
+    "firebase_url": "https://newdriver-64dba.firebaseio.com",
+    "project_id": "newdriver-64dba",
+    "storage_bucket": "newdriver-64dba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167257653983:android:ba70813f8b2cfd07",
+        "android_client_info": {
+          "package_name": "com.malekk.newdriver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "167257653983-vb0gl43i7jdhcj9tt6fupeags96j8sjm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.malekk.newdriver",
+            "certificate_hash": "ef176d7ac213c0dc88bf3c73c8e663a87881e194"
+          }
+        },
+        {
+          "client_id": "167257653983-5acjldlhdker2oh8rmsrpabotcr6s6rk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.malekk.newdriver",
+            "certificate_hash": "d8bf355eaba35bc6d25dbf72f8f60cf682100c5c"
+          }
+        },
+        {
+          "client_id": "167257653983-f90sf8ltfgruuki0rqiuvfnie4cb24jv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdhFsyA3WxswAN6QHbCX1m8ERbh78e1NM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "167257653983-f90sf8ltfgruuki0rqiuvfnie4cb24jv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
