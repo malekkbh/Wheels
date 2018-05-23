@@ -1,11 +1,10 @@
 package com.malekk.newdriver.Recycler;
 
-import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -19,13 +18,8 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.Spinner;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,10 +30,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.malekk.newdriver.DataSorce.TeacherDayDataSorce;
 import com.malekk.newdriver.MainActivity;
+import com.malekk.newdriver.MyStudents;
 import com.malekk.newdriver.R;
 import com.malekk.newdriver.models.Day;
 import com.malekk.newdriver.models.Notification;
-import com.malekk.newdriver.models.Profile;
 import com.malekk.newdriver.models.ScheduleDay;
 import com.malekk.newdriver.models.lesson;
 
@@ -87,7 +81,7 @@ public class TeacherDayRecyclerAdapter extends  RecyclerView.Adapter<TeacherDayR
 
 
     int i , j  ;
-
+    private ProgressDialog progressDialog;
 
 
     //Constructor that takes the inflater.
@@ -122,6 +116,9 @@ public class TeacherDayRecyclerAdapter extends  RecyclerView.Adapter<TeacherDayR
                 TeacherDayRecyclerAdapter.this.notifyDataSetChanged();
                 System.out.println("**** +" + dayList.size());
 
+                if (context.getSharedPreferences("re" , Context.MODE_PRIVATE).getInt("mChange" , 0) == 2 && dayList.size() != 0 ){
+                    replaceStudents();
+                }
 
                 if ( dayList.size() == 0 ){
                     today.getDayOfTheWeek(new TeacherDayDataSorce.DayOfTheWeekArrived() {
@@ -135,6 +132,8 @@ public class TeacherDayRecyclerAdapter extends  RecyclerView.Adapter<TeacherDayR
                                 newScheduleDay = dayData;
                                 newDay = new Day(newScheduleDay , date) ;
                                 dayList = newDay.daySchedule;
+
+
                             }
 
                             else {
@@ -230,6 +229,12 @@ public class TeacherDayRecyclerAdapter extends  RecyclerView.Adapter<TeacherDayR
         h.tvEnd.setText(lessonPos.getSingleLesson().getEnd());
         h.tvAvibable.setText(lessonPos.getStudentName());
         h.tvDate.setText(date.toString("dd/MM/yy"));
+
+        if(lessonPos.getStudentName().equals("free")  )
+            h.imgTD.setImageResource(R.drawable.icons80_percents_filled);
+        else
+            h.imgTD.setImageResource(R.drawable.icons8_checked);
+
     }
 
 
@@ -258,29 +263,58 @@ public class TeacherDayRecyclerAdapter extends  RecyclerView.Adapter<TeacherDayR
 
                 if (direction == ItemTouchHelper.LEFT){
 
-                  final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                  builder.setTitle("Are sure you want to Cancel the lesson ?!") ;
-                  builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                      @Override
-                      public void onClick(DialogInterface dialog, int which) {
-                          cancelStudent(TeacherDayRecyclerAdapter.this.dayList.get(position));
-                          Toast.makeText(context, "Canceled!", Toast.LENGTH_LONG).show();
-                      }
-                  })
-                  .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                      @Override
-                      public void onClick(DialogInterface dialog, int which) {
-                          builder.show().dismiss();
-                          TeacherDayRecyclerAdapter.this.notifyDataSetChanged();
+                    if( !TeacherDayRecyclerAdapter.this.dayList.get(position).getStudentName().equals(name)
+                            && teacherStudent.equals("Student")) {
+                        AlertDialog.Builder builderN = new AlertDialog.Builder(context);
 
-                      }
-                  });
+                        builderN.setTitle("It's Not Your Lessone to cancel !")
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        TeacherDayRecyclerAdapter.this.notifyDataSetChanged();
+                                    }
+                                });
 
-                  builder.show().show();
+                        builderN.show().show();
+                    }
+                    else { //
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setTitle("Are sure you want to Cancel the lesson ?!");
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
 
-                } else {
-                    initDialog();
+                                cancelStudent(TeacherDayRecyclerAdapter.this.dayList.get(position));
+                                Toast.makeText(context, "Canceled!", Toast.LENGTH_LONG).show();
+                            }
+
+                        })
+                                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        builder.show().dismiss();
+                                        TeacherDayRecyclerAdapter.this.notifyDataSetChanged();
+
+                                    }
+                                });
+
+                        builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialog) {
+                                TeacherDayRecyclerAdapter.this.notifyDataSetChanged();
+                            }
+                        }) ;
+
+                        builder.show().show();
+                    }
+
+                } else { // diriction swip right
+                    if (ref.getString(MainActivity.USER_STUDENT_TEACHER ,"").equals("Teacher"))
+                                 initDialog();
+                    else
+                        studentPickLesson(dayList.get(pos));
+
                 }
             }
 
@@ -295,32 +329,34 @@ public class TeacherDayRecyclerAdapter extends  RecyclerView.Adapter<TeacherDayR
                 Bitmap icon;
 
 
-                if(actionState == ItemTouchHelper.ACTION_STATE_SWIPE){
+                if(actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
 
+                    String studentName = ref.getString(MainActivity.USER_NAME, "");
                     View itemView = viewHolder.itemView;
                     float height = (float) itemView.getBottom() - (float) itemView.getTop();
                     float width = height / 3;
 
-                    if(dX > 0){
+                    if (dX > 0 ) {
                         p.setColor(Color.parseColor("#388E3C"));
-                        RectF background = new RectF((float) itemView.getLeft(), (float) itemView.getTop(), dX,(float) itemView.getBottom());
-                        c.drawRect(background,p);
-                        Drawable d = context.getResources().getDrawable( R.drawable.icons8_edit_filled);
-                        icon = TeacherDayRecyclerAdapter.this.drawableToBitmap(d) ;
+                        RectF background = new RectF((float) itemView.getLeft(), (float) itemView.getTop(), dX, (float) itemView.getBottom());
+                        c.drawRect(background, p);
+                        Drawable d = context.getResources().getDrawable(R.drawable.icons8_edit_filled);
+                        icon = TeacherDayRecyclerAdapter.this.drawableToBitmap(d);
                         //icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.fui_done_check_mark);
-                        RectF icon_dest = new RectF((float) itemView.getLeft() + width ,(float) itemView.getTop() + width,(float) itemView.getLeft()+ 2*width,(float)itemView.getBottom() - width);
-                        c.drawBitmap(icon,null,icon_dest,p);
+                        RectF icon_dest = new RectF((float) itemView.getLeft() + width, (float) itemView.getTop() + width, (float) itemView.getLeft() + 2 * width, (float) itemView.getBottom() - width);
+                        c.drawBitmap(icon, null, icon_dest, p);
                     } else {
                         p.setColor(Color.parseColor("#D32F2F"));
-                        RectF background = new RectF((float) itemView.getRight() + dX, (float) itemView.getTop(),(float) itemView.getRight(), (float) itemView.getBottom());
-                        c.drawRect(background,p);
-                        Drawable d = context.getResources().getDrawable( R.drawable.icons8_delete_sign);
+                        RectF background = new RectF((float) itemView.getRight() + dX, (float) itemView.getTop(), (float) itemView.getRight(), (float) itemView.getBottom());
+                        c.drawRect(background, p);
+                        Drawable d = context.getResources().getDrawable(R.drawable.icons8_delete_sign);
 
-                        icon = TeacherDayRecyclerAdapter.this.drawableToBitmap(d) ;
-                                //BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_menu_camera);
-                        RectF icon_dest = new RectF((float) itemView.getRight() - 2*width ,(float) itemView.getTop() + width,(float) itemView.getRight() - width,(float)itemView.getBottom() - width);
-                        c.drawBitmap(icon, null   ,icon_dest,p);
+                        icon = TeacherDayRecyclerAdapter.this.drawableToBitmap(d);
+                        //BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_menu_camera);
+                        RectF icon_dest = new RectF((float) itemView.getRight() - 2 * width, (float) itemView.getTop() + width, (float) itemView.getRight() - width, (float) itemView.getBottom() - width);
+                        c.drawBitmap(icon, null, icon_dest, p);
                     }
+
                 }
                 super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
             }
@@ -342,8 +378,6 @@ public class TeacherDayRecyclerAdapter extends  RecyclerView.Adapter<TeacherDayR
         final View view = activity.getLayoutInflater().inflate(R.layout.teacher_day_dialog, null, false);
 
 
-
-
         Button teacherBreakBtn = (Button) view.findViewById(R.id.btnTeacherBreak) ;
         final Button replaceStudentBtn = (Button) view.findViewById(R.id.btnReplaceStudent) ;
         Button btnCancel = (Button) view.findViewById(R.id.btnCancel) ;
@@ -352,18 +386,22 @@ public class TeacherDayRecyclerAdapter extends  RecyclerView.Adapter<TeacherDayR
 
         final AlertDialog alert1 = alertbuilder.show() ;
 
+        alert1.getWindow().setBackgroundDrawableResource(R.color.fui_transparent);
 
         teacherBreakBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 teacherBreak(TeacherDayRecyclerAdapter.this.dayList.get(TeacherDayRecyclerAdapter.this.pos));
+                alert1.dismiss();
             }
         });
 
         replaceStudentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceStudents(TeacherDayRecyclerAdapter.this.dayList.get(TeacherDayRecyclerAdapter.this.pos));
+                context.getSharedPreferences("re" , Context.MODE_PRIVATE).edit().putInt("mChange" , 0 ).commit() ;
+                replaceStudents();
+               alert1.dismiss();
             }
         });
 
@@ -376,7 +414,12 @@ public class TeacherDayRecyclerAdapter extends  RecyclerView.Adapter<TeacherDayR
         });
 
 
-
+        alert1.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                TeacherDayRecyclerAdapter.this.notifyDataSetChanged();
+            }
+        });
 
 
         alert1.show();
@@ -416,50 +459,92 @@ public class TeacherDayRecyclerAdapter extends  RecyclerView.Adapter<TeacherDayR
         Notification noti = new Notification( cancelledID , "Lesson Cancelled" ,
                 "Youer lessone have been cancelled by your Teacher") ;
 
-        FirebaseDatabase.getInstance().getReference("/Notifications").push().child("notification").setValue(noti) ;
+        FirebaseDatabase.getInstance().getReference().child("Notifications").push().child("notification").setValue(noti) ;
 
     }// teacherBreak
 
-    public void replaceStudents (lesson ls ){
-        String newStudent = "" ;
-       // newStudent = spStudent.getSelectedItem().toString() ;
+    public void replaceStudents (){
 
-        lesson abc = ls ;
+        // newStudent = spStudent.getSelectedItem().toString() ;
+        SharedPreferences replaceRef = context.getSharedPreferences("re" , Context.MODE_PRIVATE) ;
+        lesson abc = null;
 
-        FirebaseDatabase.getInstance().getReference()
-                .child("Day")
-                .child(teacherID)
-                .child(String.valueOf(date.year().get()))
-                .child(String.valueOf(date.getMonthOfYear()))
-                .child(String.valueOf(date.getDayOfMonth()))
-                .child(abc.toString())
-                .removeValue() ;
 
-        String cancelledStudentID = abc.getId() ;
-        abc.setStudentName(newStudent);
-        abc.setId("");
+        if ( context.getSharedPreferences("re" , Context.MODE_PRIVATE).getInt("mChange" , 0) == 0 ) {
+            context.getSharedPreferences("re", Context.MODE_PRIVATE).edit().putInt("mChange", 1).commit();
 
-        DatabaseReference reff = FirebaseDatabase.getInstance().getReference()
-                .child("Day").child(teacherID)
-                .child(String.valueOf(date.year().get()))
-                .child(String.valueOf(date.getMonthOfYear()))
-                .child(String.valueOf(date.getDayOfMonth()))
-                .child(abc.toString()) ;
+            lesson ls = dayList.get(pos);
 
-        reff.setValue(abc);
-        reff.child("ID").setValue(UID) ;
+            replaceRef.edit().putString("oldName", ls.getStudentName()).commit();
+            replaceRef.edit().putString("ls_tostring", ls.toString()).commit();
+            replaceRef.edit().putString("date", date.toString("dd.MM.yy")).commit();
+            replaceRef.edit().putInt("pos", pos).commit();
+           // replaceRef.edit().putInt("mChange" , 1) ;
 
-        TeacherDayRecyclerAdapter.this.notifyDataSetChanged();
 
-        Notification newStudentNotification = new Notification( abc.getId() , "Your lessone is aproved" ,
-                "you have been singed to lesson at : " + abc.getSingleLesson().getStart() + "0n: " + date.toString("dd.MM.yy")) ;
+            FragmentActivity activity = (FragmentActivity) context;
+            activity.getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyStudents()).commit();
+        }
 
-        Notification cancelledLesson = new Notification( cancelledStudentID ,"Your lesson have been cancelld" ,
-                "Your lesson at: " + abc.getSingleLesson().getStart() + "on: " + date.toString("dd.MM.yy") + "have been cancelled" ) ;
+        else {
+            if (replaceRef.getInt("mChange", 0) == 2) {
 
-        DatabaseReference ref =  FirebaseDatabase.getInstance().getReference("/Notifications") ;
-        ref.push().child("notification").setValue(newStudentNotification) ;
-        ref.push().child("notification").setValue(cancelledLesson) ;
+                for (lesson f : dayList) {
+                    if (f.toString().equals(replaceRef.getString("ls_tostring", "")))
+                        abc = f;
+                }
+
+             //  System.out.println("******: " + abc.toString());
+
+                String newStudentID = replaceRef.getString("newID", "");
+                String newStudentName = replaceRef.getString("newName", "");
+
+
+                FirebaseDatabase.getInstance().getReference()
+                        .child("Day")
+                        .child(teacherID)
+                        .child(String.valueOf(date.year().get()))
+                        .child(String.valueOf(date.getMonthOfYear()))
+                        .child(String.valueOf(date.getDayOfMonth()))
+                        .child(replaceRef.getString("ls_tostring", ""))
+                        .removeValue();
+
+                String cancelledStudentID = abc.getId();
+
+                abc.setStudentName(newStudentName);
+                abc.setId(newStudentID);
+
+                DatabaseReference reff = FirebaseDatabase.getInstance().getReference()
+                        .child("Day").child(teacherID)
+                        .child(String.valueOf(date.year().get()))
+                        .child(String.valueOf(date.getMonthOfYear()))
+                        .child(String.valueOf(date.getDayOfMonth()))
+                        .child(abc.toString());
+
+                reff.setValue(abc);
+
+                // reff.child("ID").setValue(newStudentID);
+
+                TeacherDayRecyclerAdapter.this.notifyDataSetChanged();
+
+                replaceRef.edit().putInt("mChange", 0).commit();
+
+
+
+                //notification
+//
+                Notification newStudentNotification = new Notification(abc.getId(), "Your lessone is aproved",
+                        "you have been singed to lesson at : " + abc.getSingleLesson().getStart() + "0n: " + date.toString("dd.MM.yy"));
+
+                Notification cancelledLesson = new Notification(cancelledStudentID, "Your lesson have been cancelld",
+                        "Your lesson at: " + abc.getSingleLesson().getStart() + "on: " + date.toString("dd.MM.yy") + "have been cancelled");
+
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/Notifications");
+                ref.push().child("notification").setValue(newStudentNotification);
+                ref.push().child("notification").setValue(cancelledLesson);
+
+            }
+        }
 
     }// end replaceStudent
 
@@ -492,21 +577,123 @@ public class TeacherDayRecyclerAdapter extends  RecyclerView.Adapter<TeacherDayR
 
 
 
+
       //  rv.removeViewAt(pos);
        // TeacherDayRecyclerAdapter.this.notifyItemRangeChanged(pos , dayList.size());
 
         TeacherDayRecyclerAdapter.this.notifyDataSetChanged();
 
+        FirebaseDatabase.getInstance().getReference().child("lessonsForThisDay").child(UID).child(date.toString("YYYY/M/d"))
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
 
+                        if (dataSnapshot.exists()) {
 
+                            int a = dataSnapshot.getValue(Integer.class);
+                            if (a > 0) {
+                                dataSnapshot.getRef().setValue(a - 1);
+                            }
+                        }
+                    }
 
-        Notification noti = new Notification( cancelledID , "Lesson Cancelled" ,
-                "Youer lessone have been cancelled by your Teacher") ;
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+        Notification noti = null ;
+        if ( ref.getString(MainActivity.USER_STUDENT_TEACHER , "").equals("Teacher")) {
+             noti = new Notification(cancelledID, "Lesson Cancelled",
+                    "Youer lessone have been cancelled by your Teacher");
+        }
+
+        else {
+            noti = new Notification(teacherID , "Lesson Cancelled" , ref.getString(MainActivity.USER_NAME , "") + " have Canceled lesson at :" +
+                    abc.getSingleLesson().getStart() + "-" + abc.getSingleLesson().getEnd()  )  ;
+        }
 
         FirebaseDatabase.getInstance().getReference("/Notifications").push().child("notification").setValue(noti) ;
+
+
+
+    } //cancelStudent
+
+
+    private void studentPickLesson(final lesson lesson) {
+
+        final int[] lessonsForThisDay = new int[1];
+
+
+        progressDialog = new ProgressDialog(context);
+
+        progressDialog.show();
+        FirebaseDatabase.getInstance().getReference().child("lessonsForThisDay").child(UID).child(date.toString("YYYY/M/d"))
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        progressDialog.dismiss();
+                        if (dataSnapshot.exists()){
+                           lessonsForThisDay[0] = Integer.valueOf(dataSnapshot.getValue().toString()) ;
+                        }
+                        else
+                            lessonsForThisDay[0] = 0 ;
+
+                        if ( lessonsForThisDay[0] > 0) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+                            builder.setTitle("You have Singed a lesson for this Day")
+                                    .setMessage("we will love to sign you for another lesson at any other day :)")
+                                    .setPositiveButton("OK" , null) ;
+                            builder.show().show();
+                        } else{
+                            if ( lesson.getStudentName().equals("free")) {
+
+
+                                DatabaseReference ref123 = FirebaseDatabase.getInstance().getReference().child("Day").child(teacherID).child(date.toString("YYYY/M/d"));
+
+                                ref123.child(lesson.toString()).removeValue();
+
+                                lesson.setStudentName(ref.getString(MainActivity.USER_NAME, ""));
+                                lesson.setId(ref.getString(MainActivity.USER_UID, ""));
+
+                                ref123.child(lesson.toString()).setValue(lesson);
+
+                                dataSnapshot.getRef().setValue(lessonsForThisDay[0] +1) ;
+
+                                FirebaseDatabase.getInstance().getReference().child("Notifications").push().child("notification").setValue(
+                                        new Notification(teacherID , "Class is Assigned" , lesson.getStudentName() + " have Assigned for  lesson at :" +
+                                      lesson.getSingleLesson().getStart() + "-" + lesson.getSingleLesson().getEnd()  ) ) ;
+
+
+                                TeacherDayRecyclerAdapter.this.notifyDataSetChanged();
+
+                            }
+                            else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(context) ;
+
+                                builder.setTitle("This lesson is unavailable").setMessage("please pick another lesson")
+                                        .setNeutralButton("OK" , null) ;
+
+                                builder.show().show();
+                            }
+
+
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+        TeacherDayRecyclerAdapter.this.notifyDataSetChanged();
+
     }
-
-
 
 
 
@@ -514,6 +701,7 @@ public class TeacherDayRecyclerAdapter extends  RecyclerView.Adapter<TeacherDayR
 
         TextView tvStart , tvEnd , tvAvibable , tvDate;
         List<String> studentsList = new ArrayList<String>();
+        ImageView imgTD ;
 
 
         //int i , j ;
@@ -525,6 +713,7 @@ public class TeacherDayRecyclerAdapter extends  RecyclerView.Adapter<TeacherDayR
             tvEnd = (TextView) v.findViewById(R.id.tvEnd);
             tvAvibable = (TextView) v.findViewById(R.id.tvAvibable);
             tvDate = (TextView) v.findViewById(R.id.tvDate) ;
+            imgTD = (ImageView) v.findViewById(R.id.imgTD) ;
 
             v.setOnClickListener(this);
             v.setOnLongClickListener(this);
@@ -801,9 +990,18 @@ public class TeacherDayRecyclerAdapter extends  RecyclerView.Adapter<TeacherDayR
 
         @Override
         public void onClick(View v) {
-            initDialog();
+
+            TeacherDayRecyclerAdapter.this.pos = this.getAdapterPosition() ;
+
+            if( ref.getString(MainActivity.USER_STUDENT_TEACHER , "").equals("Teacher") )
+                initDialog();
+
+            else
+                studentPickLesson(dayList.get(getAdapterPosition()));
         }
+
     }
+
 
 
 

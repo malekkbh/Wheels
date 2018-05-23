@@ -19,6 +19,9 @@ public class Schedule {
         this.saturday = saturday;
     }
 
+    public Schedule() {
+    }
+
     public ScheduleDay getSunday() {
         return sunday;
     }

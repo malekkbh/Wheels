@@ -1,9 +1,11 @@
 package com.malekk.newdriver.Recycler;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -20,6 +22,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -115,7 +119,7 @@ public class TeachersRecyclerAdapter extends RecyclerView.Adapter<TeachersRecycl
 
         Profile profile = profiles.get(position);
 
-        h.tvName.setText(profile.getName().toString());
+     //   h.tvName.setText(profile.getName().toString());
 
         if ( profile.getName() != null )
          //   h.tvName.setText("");
@@ -176,27 +180,42 @@ public class TeachersRecyclerAdapter extends RecyclerView.Adapter<TeachersRecycl
 
         @Override
         public void onClick(View v) {
-            
+
+            final ProgressDialog PPD = new ProgressDialog(context) ;
+            PPD.setMessage("Loading");
+            PPD.show();
+
             if ( ref.getString(MainActivity.USER_STUDENT_TEACHER , "").equals("Teacher")){
                 Toast.makeText(context, "You Are a Teacher!", Toast.LENGTH_SHORT).show();
                 return;
             }
+
             FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
 
             int position = getAdapterPosition();
             Profile selectedTeacher = profiles.get(position);
 
-            DatabaseReference refVehicleCategories = FirebaseDatabase.getInstance().getReference("profile").child(mUser.getUid());
-            refVehicleCategories.child("teacher").setValue(selectedTeacher.getuID());
-            refVehicleCategories.child("stage").setValue(MainActivity.STUDENT_DEAL) ;
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("profile").child(mUser.getUid());
+
+            userRef.child("teacher").setValue(selectedTeacher.getuID());
+
+            userRef.child("stage").setValue(MainActivity.STUDENT_DEAL).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    PPD.dismiss();
+                }
+            }) ;
 
 
-
-            StudentDeal studentDeal = new StudentDeal();
-            Context fContext = studentDeal.getContext();
+            SharedPreferences.Editor et = context.getSharedPreferences("Mt", Context.MODE_PRIVATE).edit();
+            et.putString("school", selectedTeacher.getTeachingSchool());
+            et.commit();
 
             editor.putInt(MainActivity.USER_STAGE , MainActivity.STUDENT_DEAL) ;
-            editor.apply();
+            editor.putString(MainActivity.USER_Teacher_ID , selectedTeacher.getuID());
+            editor.putString(MainActivity.USER_TEACHER_NAME , selectedTeacher.getName()) ;
+            editor.putString(MainActivity.USER_SCHOOL , selectedTeacher.getTeachingSchool()) ;
+            editor.commit();
 
             FragmentActivity activity = (FragmentActivity) context;
 

@@ -1,6 +1,10 @@
 package com.malekk.newdriver.Recycler;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +13,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.malekk.newdriver.DataSorce.TeachingAreasDataSorce;
 import com.malekk.newdriver.R;
 import com.malekk.newdriver.models.City;
@@ -86,7 +94,33 @@ public class TeachigAreasRecyclerAdapter extends RecyclerView.Adapter<TeachigAre
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(context, "ok", Toast.LENGTH_SHORT).show();
+
+                final int pos = this.getAdapterPosition() ;
+                final City thisCity = cityList.get(pos) ;
+            AlertDialog.Builder builder = new AlertDialog.Builder(context) ;
+            builder.setTitle("Detlet '" + cityList.get(pos).toString() + "' From your Teaching Areas ?")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            final ProgressDialog pd = new ProgressDialog(context);
+                            pd.show();
+                            FirebaseDatabase.getInstance().getReference().child("TeachingAreas")
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .child(thisCity.getCity() + " - " + thisCity.getCityLocation()).removeValue()
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            pd.dismiss();
+                                        }
+                                    }) ;
+                           // Toast.makeText(context, "removed", Toast.LENGTH_SHORT).show();
+                            cityList.remove(pos) ;
+                            TeachigAreasRecyclerAdapter.this.notifyDataSetChanged();
+                        }
+                    })
+                    .setNegativeButton("Cancel" , null) ;
+            builder.show().show();
+
 
         }
     }

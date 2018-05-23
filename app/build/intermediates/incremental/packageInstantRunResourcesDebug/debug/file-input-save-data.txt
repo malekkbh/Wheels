@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Mon May 21 15:05:27 IDT 2018
+0.baseType=DIRECTORY
+0.base=/Users/malekkbh/Desktop/untitled folder/NewDriver/app/build/intermediates/assets/debug
+0.path=crashlytics-build.properties
+0.set=ASSET
+count=1

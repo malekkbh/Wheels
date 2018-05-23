@@ -67,4 +67,5 @@
     </string-array>
     <string name="title_activity_teacher_day">TeacherDay</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
 </resources>

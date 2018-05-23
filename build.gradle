@@ -21,13 +21,15 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-
         // REQUIRED: Google's new Maven repo is required for the latest
 // support library that is compatible with Android O
         maven {
             url 'https://maven.google.com'
             // Alternative URL is 'https://dl.google.com/dl/android/maven2/'
-        }
+            }
+
+        maven { url 'https://jitpack.io' }
+
     }
 }
 

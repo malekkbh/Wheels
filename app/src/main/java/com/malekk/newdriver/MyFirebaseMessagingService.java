@@ -7,7 +7,6 @@ import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
-import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -38,11 +37,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         if(remoteMessage.getNotification() !=null ) {
             Log.d(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
-            showNotifications(remoteMessage.getNotification().getBody()) ;
+            showNotifications(remoteMessage.getNotification().getBody() , remoteMessage.getNotification().getTitle()) ;
+
         }
     }
 
-    private void showNotifications(String body) {
+    private void showNotifications(String body , String title) {
 
         Intent intent = new Intent(this , MainActivity.class) ;
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) ;
@@ -56,8 +56,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
         NotificationCompat.Builder notificationBouilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("Wheels!")
+                .setSmallIcon(R.drawable.notification_logo)
+                .setContentTitle(title)
                 .setContentText(body)
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setContentIntent(pendingIntent) ;

@@ -9,12 +9,12 @@
             android:title="Teaching Area" />
         <item
             android:id="@+id/nav_my_classes"
-            android:icon="@drawable/icons8_to_do_filled"
+            android:icon="@drawable/icons8_classroom"
             android:title="My classes" />
-        <item
-            android:id="@+id/nav_teachers"
-            android:icon="@drawable/icons8_training"
-            android:title="Teachers" />
+        <!--<item-->
+            <!--android:id="@+id/nav_teachers"-->
+            <!--android:icon="@drawable/icons8_training"-->
+            <!--android:title="Teachers" />-->
         <item
             android:id="@+id/nav_teacher_scedule"
             android:icon="@drawable/icons8_overtime_filled"

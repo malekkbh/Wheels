@@ -18,15 +18,16 @@
         android:layout_height="wrap_content">
 
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/ivImg"
             android:layout_width="91dp"
             android:layout_height="103dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
+            android:src="@drawable/icons8_user_50"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/icons8_user" />
+            app:srcCompat="@drawable/icons8_user_50" />
 
         <TextView
             android:id="@+id/tvName"
@@ -67,6 +68,7 @@
             android:ems="10"
             android:hint="menwal/auto"
             android:inputType="textPersonName"
+            android:textAlignment="center"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/tvCatigories"
             app:layout_constraintHorizontal_bias="1.0"
@@ -79,13 +81,12 @@
             android:id="@+id/tvCatigories"
             android:layout_width="152dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="0dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="0dp"
             android:ems="10"
             android:hint="A1, A2, A, B, C1, C, D, D1, D2, D3, E, 1 "
             android:inputType="textPersonName"
+            android:textAlignment="center"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/rbRating"
             app:layout_constraintHorizontal_bias="1.0"

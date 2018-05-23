@@ -7,12 +7,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,13 +37,19 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.malekk.newdriver.MainActivity;
 import com.malekk.newdriver.R;
+import com.malekk.newdriver.models.HttpHandler;
 import com.malekk.newdriver.models.Profile;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.ContentValues.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,7 +61,7 @@ public class TeacherSingUp extends Fragment {
     private EditText      etPhone ;
     private EditText      etEmail ;
     private ImageView     teacherImage ;
-    private EditText      etAdress ;
+    private AutoCompleteTextView      etAdress ;
     private Button        btnBrawse ;
     private Button        btnSave ;
     AutoCompleteTextView  etBank ;
@@ -89,11 +98,12 @@ public class TeacherSingUp extends Fragment {
          View v= inflater.inflate(R.layout.fragment_teacher_sing_up, container, false);
 
 
+
         etName = (EditText) v.findViewById(R.id.etName);
         etPhone = (EditText) v.findViewById(R.id.etPhone);
         etEmail = (EditText) v.findViewById(R.id.etEmail);
         teacherImage = (ImageView) v.findViewById(R.id.teacherImg) ;
-        etAdress = (EditText) v.findViewById(R.id.etAdress);
+        etAdress = (AutoCompleteTextView) v.findViewById(R.id.etAdress);
         etBank = (AutoCompleteTextView) v.findViewById(R.id.etBank);
         etBankBranch = (AutoCompleteTextView) v.findViewById(R.id.etBranch);
         etBankAccount = (EditText) v.findViewById(R.id.etBankaccount);
@@ -109,6 +119,8 @@ public class TeacherSingUp extends Fragment {
         mAuth = FirebaseAuth.getInstance();
 
         mUser = mAuth.getCurrentUser();
+
+        new getCity().execute() ;
 
         String name = mUser.getDisplayName();
 
@@ -154,7 +166,7 @@ public class TeacherSingUp extends Fragment {
                 Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-        Activity av =(Activity) this.getActivity() ;
+        editor.putInt(MainActivity.USER_STAGE , 23004 ).commit() ;
 
         startActivityForResult(i, 13);
     }
@@ -255,6 +267,87 @@ public class TeacherSingUp extends Fragment {
     }
 
 
+    private class getCity extends AsyncTask<Void, Void, ArrayList<String>> {
+
+        //properties:
+        View dialogView;
+
+        ProgressDialog pd ;
+
+        private  String url = "https://raw.githubusercontent.com/royts/israel-cities/master/israel-cities.json";
+
+
+        //ctor:
+        public getCity() {
+            // this.dialogView = dialogView;
+        }
+
+
+
+        //Show progress:
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd = new ProgressDialog(TeacherSingUp.this.getContext());
+            pd.setMessage("Loading..");
+            pd.setCancelable(false);
+            pd.show();
+        }
+
+
+        //runs in the background thread.
+        //Thread job -> ArrayList
+        @Override
+        protected ArrayList<String> doInBackground(Void... voids) {
+            ArrayList<String> result = new ArrayList<>();
+            HttpHandler sh = new HttpHandler();
+
+            String jsonStr =
+//                    "{\n "
+//                     + "\"israel-cities\"" +":"
+//                    +
+                    sh.makeServiceCall(url);
+
+
+            Log.e(TAG, "Response from url: " + jsonStr);
+
+            if (jsonStr != null) {
+                try {
+                    JSONArray cities = new JSONArray(jsonStr);
+
+                    // looping through All Contacts
+                    for (int i = 0; i < cities.length(); i++) {
+                        JSONObject c = cities.getJSONObject(i);
+                        result.add((String) c.get("english_name"));
+                    }
+                } catch (final JSONException e) {
+                    Log.e(TAG, "Json parsing error: " + e.getMessage());
+
+                }
+            } else {
+                Log.e(TAG, "Couldn't get json from server.");
+            }
+
+            return result;
+        }
+
+        //runs on the UI Thread
+        @Override
+        protected void onPostExecute(ArrayList<String> result) {
+            super.onPostExecute(result);
+            // Dismiss the progress dialog
+            if (pd.isShowing())
+                pd.dismiss();
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(TeacherSingUp.this.context
+                    ,
+                    android.R.layout.simple_dropdown_item_1line, result);
+
+            //   final View dialogView = getLayoutInflater().inflate(R.layout.fragment_add_area, null, false);
+
+            etAdress.setAdapter(adapter);
+        }
+
+    }//classGetCity
 
 
 

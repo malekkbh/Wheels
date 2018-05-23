@@ -2,9 +2,12 @@ package layout;
 
 
 import android.app.Notification;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.RectF;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,11 +19,17 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 import android.util.* ;
 
+import com.alamkanak.weekview.MonthLoader;
+import com.alamkanak.weekview.WeekView;
+import com.alamkanak.weekview.WeekViewEvent;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.malekk.newdriver.R;
@@ -28,16 +37,20 @@ import com.malekk.newdriver.models.Schedule;
 import com.malekk.newdriver.models.ScheduleDay;
 import org.joda.time.LocalDateTime;
 
+import java.util.List;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TeacherSchedule extends Fragment {
+public class TeacherSchedule extends Fragment implements View.OnClickListener {
 
     TextView tvMonDAy, tvSunDay, tvTusDay, tvWeDay, tvThuDay, tvFrDay , tvSatDay, tcSunStart,  tcSunEnd, tcMonStart, tcMonEnd , tcTuStart , tcTuEnd ,
             tcWeStart , tcWeEnd , tcThuStart , tcThuEnd , tcFriStart , tcFriEnd , tcSatStart , tcSatEnd ;
 
     Button btnSetAll , btnSave ;
+
+    WeekView mWeekView ;
 
     int minutes, hour , i=0 ;
     boolean isTimePickerUsed = false ;
@@ -52,44 +65,97 @@ public class TeacherSchedule extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_teaher_schedule, container, false);
 
+
+
+// The week view has infinite scrolling horizontally. We have to provide the events of a
+// month every time the month changes on the week view.
+
+
+// Set long press listener for events.
+
+
+
         tcSunStart = (TextView) v.findViewById(R.id.tcSunStart) ;
-        tcSunEnd = (TextView) v.findViewById(R.id.tcSunEnd) ;
+        tcSunEnd   = (TextView) v.findViewById(R.id.tcSunEnd) ;
 
         tcMonStart = (TextView) v.findViewById(R.id.tcMonStart) ;
-        tcMonEnd = (TextView) v.findViewById(R.id.tcMonEnd) ;
+        tcMonEnd   = (TextView) v.findViewById(R.id.tcMonEnd) ;
 
-        tcTuStart = (TextView) v.findViewById(R.id.tcTuStart) ;
-        tcTuEnd = (TextView) v.findViewById(R.id.tcTuEnd) ;
+        tcTuStart  = (TextView) v.findViewById(R.id.tcTuStart) ;
+        tcTuEnd    = (TextView) v.findViewById(R.id.tcTuEnd) ;
 
-        tcWeStart = (TextView) v.findViewById(R.id.tcWeStart) ;
-        tcWeEnd = (TextView) v.findViewById(R.id.tcWeEnd) ;
+        tcWeStart  = (TextView) v.findViewById(R.id.tcWeStart) ;
+        tcWeEnd    = (TextView) v.findViewById(R.id.tcWeEnd) ;
 
         tcThuStart = (TextView) v.findViewById(R.id.tcThuStart) ;
-        tcThuEnd = (TextView) v.findViewById(R.id.tcThuEnd) ;
+        tcThuEnd   = (TextView) v.findViewById(R.id.tcThuEnd) ;
 
         tcFriStart = (TextView) v.findViewById(R.id.tcFriStart) ;
-        tcFriEnd = (TextView) v.findViewById(R.id.tcFriEnd) ;
+        tcFriEnd   = (TextView) v.findViewById(R.id.tcFriEnd) ;
 
         tcSatStart = (TextView) v.findViewById(R.id.tcSatStart) ;
-        tcSatEnd = (TextView) v.findViewById(R.id.tcSatEnd) ;
+        tcSatEnd   = (TextView) v.findViewById(R.id.tcSatEnd) ;
 
-        btnSetAll = (Button) v.findViewById(R.id.btnSetAll) ;
-        btnSave = (Button) v.findViewById(R.id.btnSave) ;
+        btnSetAll  = (Button) v.findViewById(R.id.btnSetAll) ;
+        btnSave    = (Button) v.findViewById(R.id.btnSave) ;
 
 
-        tcSunStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setSingleTimeZone(v);
-            }
-        });
 
-        tcSunEnd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setSingleTimeZone(v);
-            }
-        });
+
+//        tcSunStart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                setSingleTimeZone(v);
+//            }
+//        });
+//
+//        tcSunEnd.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                setSingleTimeZone(v);
+//            }
+//        });
+
+        final ProgressDialog pd = new ProgressDialog(getActivity()) ;
+        pd.show();
+
+        FirebaseDatabase.getInstance().getReference().child("teacherSchedule").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Schedule sch = null;
+                        if (dataSnapshot.exists()){
+                            sch = dataSnapshot.getValue(Schedule.class);
+                        }
+
+                        fillTP(sch);
+
+                        pd.dismiss();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+        tcSunStart.setOnClickListener(this);
+        tcSunEnd.setOnClickListener(this);
+        tcMonStart.setOnClickListener(this);
+        tcMonEnd.setOnClickListener(this);
+        tcTuStart.setOnClickListener(this);
+        tcTuEnd.setOnClickListener(this);
+        tcWeStart.setOnClickListener(this);
+        tcWeEnd.setOnClickListener(this);
+        tcThuStart.setOnClickListener(this);
+        tcThuEnd.setOnClickListener(this);
+        tcFriStart.setOnClickListener(this);
+        tcFriEnd.setOnClickListener(this);
+        tcSatStart.setOnClickListener(this);
+        tcSatEnd.setOnClickListener(this);
+
+
+
 
 
         btnSetAll.setOnClickListener(new View.OnClickListener() {
@@ -99,33 +165,6 @@ public class TeacherSchedule extends Fragment {
             }
         });
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                save();
-
-                SharedPreferences prefs = getActivity().getSharedPreferences("pushToken", Context.MODE_PRIVATE);
-                String pushToken = prefs.getString("token", "");
-
-
-                //FirebaseDatabase.getInstance().getReference().child("messages").push().child("original").setValue("pushToken");
-               // FirebaseMessaging.getInstance().subscribeToTopic("sendNotifications");
-
-                String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-                com.malekk.newdriver.models.Notification mm =
-                        new com.malekk.newdriver.models.Notification(UID , "test", "is it ok?!");
-                com.malekk.newdriver.models.Notification notifs = new com.malekk.newdriver.models.Notification();
-
-                System.out.println("UID : " + UID + " token: " + pushToken );
-                //
-                FirebaseDatabase.getInstance().getReference("Notifications").push().child("notification").setValue(mm) ;
-
-                Toast.makeText(getContext(), "saved!", Toast.LENGTH_LONG).show();
-
-
-            }
-        });
 
         return v;
     }
@@ -186,7 +225,7 @@ public class TeacherSchedule extends Fragment {
                         tcFriEnd.setText(h + ":" + m);
                         tcSatEnd.setText(h + ":" + m);
 
-
+                        save();
 
                 }
             }, 0, 0, true);
@@ -219,6 +258,8 @@ public class TeacherSchedule extends Fragment {
                         tcThuStart.setText(h + ":" + m);
                         tcFriStart.setText(h + ":" + m);
                         tcSatStart.setText(h + ":" + m);
+
+                        save();
                 }
             }, 0, 0, true);
 
@@ -228,12 +269,38 @@ public class TeacherSchedule extends Fragment {
         LocalDateTime q = new LocalDateTime ();
         String s = q.toString("dd.MM.yy");
 
+        save();
+
         Toast.makeText(getActivity(), s , Toast.LENGTH_LONG).show();
 
     }
 
 
+    public void fillTP (Schedule schedule) {
 
+
+        tcSunStart.setText(schedule.getSunday().getStart().toString());
+        tcSunEnd  .setText(schedule.getSunday().getEnd().toString());
+
+        tcMonStart .setText(schedule.getMonday().getStart().toString());
+        tcMonEnd  .setText(schedule.getMonday().getEnd().toString());
+
+        tcTuStart  .setText(schedule.getTuesday().getStart().toString());
+        tcTuEnd    .setText(schedule.getTuesday().getEnd().toString());
+
+        tcWeStart  .setText(schedule.getWednesday().getStart().toString());
+        tcWeEnd    .setText(schedule.getWednesday().getEnd().toString());
+
+        tcThuStart .setText(schedule.getThursday().getStart().toString());
+        tcThuEnd   .setText(schedule.getThursday().getEnd().toString());
+
+        tcFriStart .setText(schedule.getFriday().getStart().toString());
+        tcFriEnd   .setText(schedule.getFriday().getEnd().toString());
+
+        tcSatStart .setText(schedule.getSaturday().getStart().toString());
+        tcSatEnd   .setText(schedule.getSaturday().getEnd().toString());
+
+    }
 
 
 
@@ -258,9 +325,9 @@ public class TeacherSchedule extends Fragment {
 
     public void setSingleTimeZone (final View v) {
 
-        v.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        v.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
 
         final TextView tv = (TextView) v ;
 
@@ -283,19 +350,24 @@ public class TeacherSchedule extends Fragment {
 
                 tv.setText(h + ":" + m);
 
+                save();
+
             }
         }, 0, 0, true);
 
         dialog.show();
 
-            }
-        });
+
+
+            }// setSingTimeZone
 
 
 
 
-
-    }//setSingTimeZone
+    @Override
+    public void onClick(View v) {
+        setSingleTimeZone(v);
+    }
 
 
 }

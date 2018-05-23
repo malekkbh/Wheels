@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3f51b5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#e5e8e8</color>
+    <color name="colorPrimary">#455a64</color>
+    <color name="colorPrimaryDark">#37474f</color>
+    <color name="colorAccent">#ff5722</color>
     <color name="rvBgColor">#d8eff0</color>
-    <color name="mm">#d6daec</color>
+    <color name="mm">#c9cce6</color>
+    <color name="textWheels">#761930</color>
+    <color name="intro1">#BF360C</color>
+    <color name="intro2">#FF6D00</color>
+    <color name="intro3">#B2FF59</color>
 </resources>

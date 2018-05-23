@@ -1,6 +1,7 @@
 package layout;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -54,11 +55,21 @@ public class StudentTeacher extends Fragment {
                 editor.putString("StudentTeacher" , "Teacher") ;
                 editor.putInt(MainActivity.USER_STAGE , MainActivity.TEACHER_SIGNUP) ;
 
+                FirebaseDatabase.getInstance().getReference().child("profile")
+                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .child("stage").setValue(MainActivity.TEACHER_SIGNUP);
+
+                FirebaseDatabase.getInstance().getReference().child("profile")
+                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .child("teacherStudent").setValue("Teacher");
+
                 editor.apply();
-                getFragmentManager().
-                        beginTransaction().replace(R.id.container, new TeacherSingUp()).commit();
+//                getFragmentManager().
+//                        beginTransaction().replace(R.id.container, new TeacherSingUp()).commit();
 
-
+                Intent i = new Intent(getActivity() , AppIntro.class) ;
+                startActivity(i);
+                getActivity().finish();
             }
         });
 
@@ -71,9 +82,22 @@ public class StudentTeacher extends Fragment {
                 editor.putString("StudentTeacher" , "Student") ;
                 editor.putInt(MainActivity.USER_STAGE , MainActivity.STUDENT_SIGNUP) ;
 
-                editor.apply();
-                getFragmentManager().
-                        beginTransaction().replace(R.id.container, new StudentSingUp()).commit();
+                FirebaseDatabase.getInstance().getReference().child("profile")
+                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .child("stage").setValue(MainActivity.STUDENT_SIGNUP);
+
+                FirebaseDatabase.getInstance().getReference().child("profile")
+                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .child("teacherStudent").setValue("Student");
+
+               editor.apply();
+//                getFragmentManager().
+//                        beginTransaction().replace(R.id.container, new StudentSingUp()).commit();
+
+                Intent intent = new Intent( getActivity() , AppIntro.class) ;
+                startActivity(intent);
+                getActivity().finish();
+
             }
         });
 

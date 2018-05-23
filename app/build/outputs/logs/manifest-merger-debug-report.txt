@@ -1,9 +1,11 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:2:1-54:12
-INJECTED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:2:1-54:12
-INJECTED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:2:1-54:12
-INJECTED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:2:1-54:12
+ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:2:1-61:12
+INJECTED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:2:1-61:12
+INJECTED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:2:1-61:12
+INJECTED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:2:1-61:12
+MERGED from [com.github.paolorotolo:appintro:4.0.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/appintro-4.0.0.aar/c4c44afdc37c4c8ec6046ad3810eb257/AndroidManifest.xml:2:1-11:12
+MERGED from [com.github.alamkanak:android-week-view:1.2.6] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/android-week-view-1.2.6.aar/6220a765378daf2f0a2cbed063ab6eda/AndroidManifest.xml:2:1-9:12
 MERGED from [com.firebaseui:firebase-ui:2.2.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/firebase-ui-2.2.0.aar/39a999b06b436da4029d8c285d3a82d8/AndroidManifest.xml:2:1-15:12
 MERGED from [com.firebaseui:firebase-ui-storage:2.2.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/firebase-ui-storage-2.2.0.aar/cc83a6a4c7cb0fc6814c0797a7695c46/AndroidManifest.xml:2:1-12:12
 MERGED from [com.firebaseui:firebase-ui-auth:2.2.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-2.2.0.aar/51f2c2d49c2bef733b581fa11784c6ff/AndroidManifest.xml:2:1-79:12
@@ -31,6 +33,7 @@ MERGED from [com.google.android.gms:play-services-basement:11.0.4] /Users/malekk
 MERGED from [com.android.support:transition:25.4.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/transition-25.4.0.aar/70cc543e2e0ee7ddde0e7d0311f91a95/AndroidManifest.xml:17:1-28:12
 MERGED from [com.android.support:support-v4:25.4.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/support-v4-25.4.0.aar/967915451da45a1398f133cea1ca4d39/AndroidManifest.xml:17:1-31:12
 MERGED from [com.squareup.picasso:picasso:2.71828] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/b4acd00b2df76e8c57754547636dc7f4/AndroidManifest.xml:2:1-14:12
+MERGED from [de.hdodenhof:circleimageview:2.2.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/circleimageview-2.2.0.aar/3d91964622d363050358b00b0bbd6075/AndroidManifest.xml:2:1-11:12
 MERGED from [com.android.support:exifinterface:27.1.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/exifinterface-27.1.0.aar/3bd0a091e25c8648741dedea1a79a01e/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:extensions:1.0.0-alpha5] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/extensions-1.0.0-alpha5.aar/2f10501587cd165d594320d10fc0ef99/AndroidManifest.xml:17:1-34:12
 MERGED from [android.arch.lifecycle:runtime:1.0.0-alpha5] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0-alpha5.aar/ad6545c573afe0af82fbac8db96100c3/AndroidManifest.xml:17:1-26:12
@@ -45,20 +48,20 @@ MERGED from [com.android.support:animated-vector-drawable:25.4.0] /Users/malekkb
 MERGED from [com.android.support:support-core-ui:25.4.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/support-core-ui-25.4.0.aar/a8874e9286c1457bd24d04d7847c7766/AndroidManifest.xml:17:1-31:12
 MERGED from [com.android.support:support-vector-drawable:25.4.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-25.4.0.aar/d613664585bd1ac46248e8632f0f9866/AndroidManifest.xml:17:1-28:12
 MERGED from [com.android.support:support-compat:25.4.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/support-compat-25.4.0.aar/f3a9caa20fc364331a974f73ea41ab9d/AndroidManifest.xml:17:1-31:12
-INJECTED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:2:1-54:12
-INJECTED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:2:1-54:12
-INJECTED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:2:1-54:12
+INJECTED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:2:1-61:12
+INJECTED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:2:1-61:12
+INJECTED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:2:1-61:12
 	package
 		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:3:5-35
 		INJECTED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml
-		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:2:1-54:12
+		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:2:1-61:12
 		INJECTED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml
-		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:2:1-54:12
+		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:2:1-61:12
 		INJECTED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:2:11-69
@@ -91,7 +94,7 @@ ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/Androi
 	android:name
 		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:8:22-70
 application
-ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:10:5-52:19
+ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:10:5-59:19
 MERGED from [com.firebaseui:firebase-ui:2.2.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/firebase-ui-2.2.0.aar/39a999b06b436da4029d8c285d3a82d8/AndroidManifest.xml:13:5-47
 MERGED from [com.firebaseui:firebase-ui:2.2.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/firebase-ui-2.2.0.aar/39a999b06b436da4029d8c285d3a82d8/AndroidManifest.xml:13:5-47
 MERGED from [com.firebaseui:firebase-ui-auth:2.2.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-2.2.0.aar/51f2c2d49c2bef733b581fa11784c6ff/AndroidManifest.xml:15:5-77:19
@@ -134,6 +137,8 @@ MERGED from [com.android.support:support-v4:25.4.0] /Users/malekkbh/.gradle/cach
 MERGED from [com.android.support:support-v4:25.4.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/support-v4-25.4.0.aar/967915451da45a1398f133cea1ca4d39/AndroidManifest.xml:25:5-29:19
 MERGED from [com.squareup.picasso:picasso:2.71828] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/b4acd00b2df76e8c57754547636dc7f4/AndroidManifest.xml:7:5-12:19
 MERGED from [com.squareup.picasso:picasso:2.71828] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/b4acd00b2df76e8c57754547636dc7f4/AndroidManifest.xml:7:5-12:19
+MERGED from [de.hdodenhof:circleimageview:2.2.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/circleimageview-2.2.0.aar/3d91964622d363050358b00b0bbd6075/AndroidManifest.xml:9:5-20
+MERGED from [de.hdodenhof:circleimageview:2.2.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/circleimageview-2.2.0.aar/3d91964622d363050358b00b0bbd6075/AndroidManifest.xml:9:5-20
 MERGED from [android.arch.lifecycle:extensions:1.0.0-alpha5] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/extensions-1.0.0-alpha5.aar/2f10501587cd165d594320d10fc0ef99/AndroidManifest.xml:26:5-32:19
 MERGED from [android.arch.lifecycle:extensions:1.0.0-alpha5] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/extensions-1.0.0-alpha5.aar/2f10501587cd165d594320d10fc0ef99/AndroidManifest.xml:26:5-32:19
 MERGED from [com.android.support:customtabs:25.4.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/customtabs-25.4.0.aar/03d80e39fb4fa3ea8b5138523b5b2407/AndroidManifest.xml:22:5-26:19
@@ -161,61 +166,85 @@ MERGED from [com.android.support:support-compat:25.4.0] /Users/malekkbh/.gradle/
 	android:label
 		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:13:9-41
 	android:roundIcon
-		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:14:9-54
+		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:14:9-56
+	android:largeHeap
+		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:17:9-33
 	android:icon
-		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:12:9-43
+		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:12:9-51
 	android:allowBackup
 		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:11:9-35
 	android:theme
-		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:16:9-40
-activity#com.malekk.newdriver.MainActivity
-ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:17:9-26:20
+		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:16:9-52
+activity#com.malekk.newdriver.SplashScreen
+ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:19:9-28:20
 	android:label
-		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:19:13-45
+		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:21:13-45
 	android:theme
-		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:20:13-56
+		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:22:13-60
 	android:name
-		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:18:13-41
+		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:20:13-41
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:21:13-25:29
+ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:23:13-27:29
 action#android.intent.action.MAIN
-ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:22:17-69
+ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:24:17-69
 	android:name
-		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:22:25-66
+		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:24:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:24:17-77
+ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:26:17-77
 	android:name
-		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:24:27-74
+		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:26:27-74
+activity#layout.AppIntro
+ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:31:9-52
+	android:name
+		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:31:19-49
+activity#com.malekk.newdriver.MainActivity
+ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:33:9-36:68
+	android:label
+		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:35:13-35
+	android:theme
+		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:36:13-56
+	android:name
+		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:34:13-41
 service#com.malekk.newdriver.MyFirebaseMessagingService
-ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:31:9-36:19
+ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:38:9-42:19
 	android:name
-		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:32:13-55
+		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:38:18-60
 intent-filter#com.google.firebase.MESSAGING_EVENT
-ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:33:13-35:29
+ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:39:13-41:29
 action#com.google.firebase.MESSAGING_EVENT
-ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:34:17-77
+ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:40:17-78
 	android:name
-		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:34:25-75
+		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:40:25-75
 service#com.malekk.newdriver.MyFirebaseInstanceIDService
-ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:39:9-44:19
+ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:45:9-49:19
 	android:name
-		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:40:13-56
+		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:45:18-61
 intent-filter#com.google.firebase.INSTANCE_ID_EVENT
-ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:41:13-43:29
+ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:46:13-48:29
 action#com.google.firebase.INSTANCE_ID_EVENT
-ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:42:17-79
+ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:47:17-80
 	android:name
-		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:42:25-77
+		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:47:25-77
 meta-data#com.google.firebase.messaging.default_notification_channel_id
-ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:48:9-50:70
+ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:51:9-53:71
 	android:value
-		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:50:13-68
+		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:53:13-68
 	android:name
-		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:49:13-89
+		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:52:13-89
+meta-data#preloaded_fonts
+ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:54:9-56:57
+	android:resource
+		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:56:13-54
+	android:name
+		ADDED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml:55:13-43
 uses-sdk
 INJECTED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml
 INJECTED from /Users/malekkbh/Desktop/untitled folder/NewDriver/app/src/main/AndroidManifest.xml
+MERGED from [com.github.paolorotolo:appintro:4.0.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/appintro-4.0.0.aar/c4c44afdc37c4c8ec6046ad3810eb257/AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.paolorotolo:appintro:4.0.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/appintro-4.0.0.aar/c4c44afdc37c4c8ec6046ad3810eb257/AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.alamkanak:android-week-view:1.2.6] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/android-week-view-1.2.6.aar/6220a765378daf2f0a2cbed063ab6eda/AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.alamkanak:android-week-view:1.2.6] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/android-week-view-1.2.6.aar/6220a765378daf2f0a2cbed063ab6eda/AndroidManifest.xml:5:5-7:41
 MERGED from [com.firebaseui:firebase-ui:2.2.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/firebase-ui-2.2.0.aar/39a999b06b436da4029d8c285d3a82d8/AndroidManifest.xml:7:5-9:41
 MERGED from [com.firebaseui:firebase-ui:2.2.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/firebase-ui-2.2.0.aar/39a999b06b436da4029d8c285d3a82d8/AndroidManifest.xml:7:5-9:41
 MERGED from [com.firebaseui:firebase-ui-storage:2.2.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/firebase-ui-storage-2.2.0.aar/cc83a6a4c7cb0fc6814c0797a7695c46/AndroidManifest.xml:8:5-10:41
@@ -270,6 +299,8 @@ MERGED from [com.android.support:support-v4:25.4.0] /Users/malekkbh/.gradle/cach
 MERGED from [com.android.support:support-v4:25.4.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/support-v4-25.4.0.aar/967915451da45a1398f133cea1ca4d39/AndroidManifest.xml:21:5-23:54
 MERGED from [com.squareup.picasso:picasso:2.71828] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/b4acd00b2df76e8c57754547636dc7f4/AndroidManifest.xml:5:5-44
 MERGED from [com.squareup.picasso:picasso:2.71828] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/b4acd00b2df76e8c57754547636dc7f4/AndroidManifest.xml:5:5-44
+MERGED from [de.hdodenhof:circleimageview:2.2.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/circleimageview-2.2.0.aar/3d91964622d363050358b00b0bbd6075/AndroidManifest.xml:5:5-7:41
+MERGED from [de.hdodenhof:circleimageview:2.2.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/circleimageview-2.2.0.aar/3d91964622d363050358b00b0bbd6075/AndroidManifest.xml:5:5-7:41
 MERGED from [com.android.support:exifinterface:27.1.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/exifinterface-27.1.0.aar/3bd0a091e25c8648741dedea1a79a01e/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:exifinterface:27.1.0] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/exifinterface-27.1.0.aar/3bd0a091e25c8648741dedea1a79a01e/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:extensions:1.0.0-alpha5] /Users/malekkbh/.gradle/caches/transforms-1/files-1.1/extensions-1.0.0-alpha5.aar/2f10501587cd165d594320d10fc0ef99/AndroidManifest.xml:22:5-24:41

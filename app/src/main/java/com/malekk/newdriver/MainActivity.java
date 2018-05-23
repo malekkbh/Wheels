@@ -1,5 +1,6 @@
 package com.malekk.newdriver;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,8 +17,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,6 +36,7 @@ import com.malekk.newdriver.models.Profile;
 
 import java.util.Arrays;
 
+import layout.AppIntro;
 import layout.MyProfile;
 import layout.StudentMain;
 import layout.StudentSingUp;
@@ -44,6 +49,8 @@ import layout.TeacherSingUp;
 import layout.Teachers;
 import layout.TeachingAreas;
 
+import static com.malekk.newdriver.R.menu.activity_main_drawer;
+
 //import layout.SignUp;
 
 public class MainActivity extends AppCompatActivity
@@ -55,7 +62,8 @@ public class MainActivity extends AppCompatActivity
     FirebaseUser mUser;
     SharedPreferences sharedPref_USER_INFO ;
     public static SharedPreferences.Editor editor ;
-
+    static TextView etNavName ;
+    TextView etNavStudentTeacher ;
 
     public static int TEACHER_SIGNUP = 122 ;
     public static int TEACHER_PRO = 123 ;
@@ -64,6 +72,7 @@ public class MainActivity extends AppCompatActivity
     public static int STUDENT_DEAL = 133 ;
     public static int STUDENT_TEACHER = 0 ;
     public static int TEACHERS = 144 ;
+    public static int APP_INTRO = 101 ;
 
 
     public static String USER_NAME = "Name" ;
@@ -80,10 +89,14 @@ public class MainActivity extends AppCompatActivity
     public static String USER_STUDENT_TEACHER = "StudentTeacher" ;
     public static String USER_IMG_URL = "ImgURI" ;
     public static String USER_STAGE = "stage" ;
+    public static ProgressDialog ABC ;
 
 
+    public static int FRAGMENT_CONTAINER = R.id.container ;
 
     public static Context contextOfApplication;
+
+
 
 
     @Override
@@ -101,9 +114,22 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         contextOfApplication = getApplicationContext() ;
+        ABC = new ProgressDialog(contextOfApplication) ;
+
 
         if ( mUser != null){
-            initWithUser();}
+            refreshSharedPref();
+        }
+
+//        boolean a = sharedPref_USER_INFO.getInt(MainActivity.USER_STAGE , 0) == 0 ;
+//         if ( sharedPref_USER_INFO.getInt(MainActivity.USER_STAGE , 0) == 0 ){
+//
+//            Intent intent = new Intent(this, AppIntro.class);
+//            startActivity(intent);
+//            finish();
+//        }
+
+
        // }
 
 
@@ -113,15 +139,47 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View headerLayout = navigationView.getHeaderView(0);
+              //  inflateHeaderView(R.layout.nav_header_main);
+         etNavName = (TextView) headerLayout.findViewById(R.id.tvNAVname);
+         etNavStudentTeacher = (TextView) headerLayout.findViewById(R.id.tvNAVemail);
+
+
+        etNavName.setText(sharedPref_USER_INFO.getString(USER_NAME, ""));
+        etNavStudentTeacher.setText(sharedPref_USER_INFO.getString(USER_STUDENT_TEACHER ,""));
+
+        Menu menu = navigationView.getMenu() ;
+
+        MenuItem TD = menu.findItem(R.id.nav_manage) ;
+
+       // MenuItem TD = (MenuItem) findViewById(R.id.nav_manage);
+
+        if ( sharedPref_USER_INFO.getString(USER_STUDENT_TEACHER , "").equals("Teacher")) {
+            TD.setTitle("My Day");
+            menu.findItem(R.id.nav_teacher_scedule).setVisible(true) ;
+            menu.findItem(R.id.nav_Teaching_Area).setVisible(true) ;
+            menu.findItem(R.id.nav_my_classes).setVisible(true).setTitle("My Students");
+        }//ifTeacher
+        else
+        {
+            menu.findItem(R.id.nav_teacher_scedule).setVisible(false) ;
+            menu.findItem(R.id.nav_Teaching_Area).setVisible(false) ;
+            menu.findItem(R.id.nav_my_classes).setVisible(false);
+
+            TD.setTitle("Sign up for calss") ;
+        }//ifStudent
 
 
 
     }//onCreate
 
     public void refreshSharedPref() {
-        if(mUser != null)
+        if( FirebaseAuth.getInstance().getCurrentUser() != null)
         FirebaseDatabase.getInstance().getReference().child("profile").child(mUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -143,9 +201,21 @@ public class MainActivity extends AppCompatActivity
                     editor.putInt(USER_STAGE , p.getStage()) ;
 
                     editor.apply();
+
+                    initWithUser();
+
                 }
 
-                initWithUser();
+                else {
+//                    if(sharedPref_USER_INFO.getInt(USER_STAGE , 0 ) != TEACHER_SIGNUP &&
+//                            sharedPref_USER_INFO.getInt(USER_STAGE , 0 ) != STUDENT_SIGNUP) {
+                        editor.clear();
+                        editor.commit();
+                        initWithUser();
+                    }
+               // }
+
+   //             initWithUser();
             }
 
             @Override
@@ -173,8 +243,14 @@ public class MainActivity extends AppCompatActivity
         //add the listener in onResume.
         mAuth.addAuthStateListener(mAuthListener);
 
-        if (mUser != null)
-        refreshSharedPref();
+
+
+        if (mUser != null) {
+            etNavName.setText(sharedPref_USER_INFO.getString(USER_NAME, ""));
+            etNavStudentTeacher.setText(sharedPref_USER_INFO.getString(USER_STUDENT_TEACHER ,""));
+            initWithUser();
+        }
+
 
     }
 
@@ -184,6 +260,7 @@ public class MainActivity extends AppCompatActivity
         //remove the listener.
         mAuth.removeAuthStateListener(mAuthListener);
     }
+
 
 
     @Override
@@ -197,10 +274,37 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu ) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+
+//        MenuItem Td = (MenuItem) menu.findItem(R.id.nav_manage) ;
+//
+//        if ( sharedPref_USER_INFO.getString(USER_STUDENT_TEACHER , "").equals("Teacher") ) {
+//            Td.setTitle("My Day");
+//        }
+
+
+
+        super.onCreateOptionsMenu(menu) ;
+
+        return true ;
+
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+//        MenuItem Td = (MenuItem) menu.findItem(R.id.nav_manage) ;
+//
+//        if ( sharedPref_USER_INFO.getString(USER_STUDENT_TEACHER , "").equals("Teacher") ) {
+//            menu.findItem(R.id.nav_manage).setTitle("My Day");
+//        }
+
+      return  super.onPrepareOptionsMenu(menu);
+
+
+
     }
 
     @Override
@@ -248,6 +352,7 @@ public class MainActivity extends AppCompatActivity
 
             }//if user == null
             else{
+                if(sharedPref_USER_INFO.getInt(USER_STAGE , 0 ) == TEACHER_DAY )
                 refreshSharedPref();
             }
 
@@ -289,15 +394,27 @@ public class MainActivity extends AppCompatActivity
     }
  ;
 
-    private void initWithUser() {
+
+    public void initWithUser() {
 
         System.out.println("USER: " + sharedPref_USER_INFO.getInt("stage" , 0));
         Log.d("user" , String.valueOf(sharedPref_USER_INFO.getInt("stage" , 0))) ;
 
-        if (sharedPref_USER_INFO.getInt("stage" , 0) == STUDENT_TEACHER ) {
+//        if (sharedPref_USER_INFO.getInt("stage" , 0) == 0 ) {
+//
+////            getSupportFragmentManager().
+////                    beginTransaction().replace(R.id.container, new StudentTeacher()).commit();
+//            editor.putInt(USER_STAGE , 1) ;
+//            editor.commit() ;
+//            Intent intent = new Intent(this , AppIntro.class) ;
+//            startActivity(intent);
+//            finish();
+//        }
+       // else
 
+        if(sharedPref_USER_INFO.getInt(USER_STAGE , 0) == STUDENT_TEACHER){
             getSupportFragmentManager().
-                    beginTransaction().replace(R.id.container, new StudentTeacher()).commit();
+                    beginTransaction().replace(R.id.container, new StudentTeacher()).commit() ;
         }
 
 //        if (sharedPref_USER_INFO.getInt("stage" , 0) == TEACHER_SIGNUP ) { //teacher
@@ -311,21 +428,43 @@ public class MainActivity extends AppCompatActivity
 //            getSupportFragmentManager().
 //                    beginTransaction().replace(R.id.container, new StudentSingUp()).commit();
 //        }
-
+        //else
         if ( sharedPref_USER_INFO.getInt("stage" , 0) == TEACHER_DAY) {
             getSupportFragmentManager().
                     beginTransaction().replace(R.id.container, new TeacherDay()).commit() ;
+
         }
 
         if (sharedPref_USER_INFO.getInt("stage" , 0 ) == TEACHER_PRO) {
             getSupportFragmentManager().beginTransaction().replace(R.id.container, new TeacherProfessionalInfo()).commit();
         }
 
+        if (sharedPref_USER_INFO.getInt("stage" , 0 ) == STUDENT_SIGNUP) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, new StudentSingUp()).commit();
+
+        }
+
+        if (sharedPref_USER_INFO.getInt("stage" , 0 ) == TEACHER_SIGNUP) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new TeacherSingUp()).commit();
+                }
+
+
+        if (sharedPref_USER_INFO.getInt("stage" , 0 ) == TEACHERS) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new Teachers()).commit();
+                }
+
+
+//        if (sharedPref_USER_INFO.getInt("stage" , 0 ) == APP_INTRO) {
+//            Intent intent = new Intent( this , AppIntro.class) ;
+//            startActivity(intent);
+//        }
+
+
+//       else
+//            getSupportFragmentManager().beginTransaction().replace(R.id.container, new StudentTeacher()).commit();
 
 
     }
-
-
 
 
 
@@ -335,16 +474,22 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_Teaching_Area) {
+            if ( sharedPref_USER_INFO.getString(USER_STUDENT_TEACHER , "").equals("Teacher")) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new TeachingAreas()).commit();
+            }else {
+                item.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+            }
 
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, new TeachingAreas()).commit();
-
-        } else if (id == R.id.nav_teachers) {
-
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, new Teachers()).commit();
+//        } else if (id == R.id.nav_teachers) {
+//
+//            getSupportFragmentManager().beginTransaction().replace(R.id.container, new Teachers()).commit();
 
         } else if (id == R.id.nav_teacher_scedule) {
-
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, new TeacherSchedule()).commit();
+            if ( sharedPref_USER_INFO.getString(USER_STUDENT_TEACHER , "").equals("Teacher")) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new TeacherSchedule()).commit();
+            }else {
+                item.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+            }
 
         } else if (id == R.id.nav_manage) {
 

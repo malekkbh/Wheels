@@ -33,8 +33,9 @@ public class TeachersDataSorce {
 
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     Profile profile = child.getValue(Profile.class);
-                     if(profile.getTeacherStudent().equals("Teacher"))
-                    profiles.add(profile);
+                        if(profile.getTeacherStudent()!= null)
+                             if(profile.getTeacherStudent().equals("Teacher"))
+                                   profiles.add(profile);
                 }
                 listener.data(profiles);
                 //load the teachersList from the DB

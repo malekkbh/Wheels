@@ -7,9 +7,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.BoringLayout;
@@ -17,6 +20,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -25,8 +31,14 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -36,7 +48,10 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.malekk.newdriver.MainActivity;
 import com.malekk.newdriver.R;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -59,9 +74,13 @@ public class MyProfile extends Fragment implements  View.OnClickListener {
     RatingBar RPRating ;
     ProgressDialog PPD ;
 
+    TextView etNavname ;
+    View headerLayout ;
+    Menu menu ;
+
     FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser() ;
 
-    ImageView imgProfile ;
+    CircleImageView imgProfile ;
 
     String befor = "" ;
     Uri dImgUri ;
@@ -87,6 +106,7 @@ public class MyProfile extends Fragment implements  View.OnClickListener {
     }
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -107,16 +127,29 @@ public class MyProfile extends Fragment implements  View.OnClickListener {
         tvTeacherStudent = (TextView) v.findViewById(R.id.tvPTeacherStudent) ;
         RPRating  = (RatingBar) v.findViewById(R.id.RBprofile) ;
 
-        imgProfile  = (ImageView) v.findViewById(R.id.imgProfile) ;
+
+        imgProfile  = (CircleImageView) v.findViewById(R.id.imgProfile) ;
 
         dImgUri = Uri.parse(ref.getString("ImgURI" , ""));
 
         final DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("profile").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
+        final Thread t = new Thread() {
+            @Override
+            public void run() {
+                PPD.dismiss();
+            }
+        } ;
 
-        if (!dImgUri.toString().equals("")){
-            Picasso.get().load(ref.getString("ImgURI" , "")).into(imgProfile);
+        if (!dImgUri.toString().equals("")) {
+//            PPD = new ProgressDialog(getContext()) ;
+//            PPD.show();
+            Picasso.get().load(ref.getString("ImgURI", "")).into((ImageView) imgProfile) ;
         }
+
+
+
+
 
         float aa = ref.getFloat(MainActivity.USER_RATING ,  0.0f) ;
 
@@ -126,7 +159,13 @@ public class MyProfile extends Fragment implements  View.OnClickListener {
         etPhone.setText(getString(MainActivity.USER_PHONE));
         tvCAtegoryah.setText(getString(MainActivity.USER_CATEGORY));
         tvGear.setText(getString(MainActivity.USER_GEAR));
-        tvSchool.setText(getString(MainActivity.USER_SCHOOL));
+
+        SharedPreferences pref = getActivity().getSharedPreferences("Mt", Context.MODE_PRIVATE);
+        String school = pref.getString("school", null);
+
+        tvSchool.setText(school);
+
+
         tvLessons.setText(ref.getInt(MainActivity.USER_LESSONS , 0 ) + "");
         tvTeacher.setText(getString(MainActivity.USER_TEACHER_NAME));
         tvTeacherStudent.setText(getString(MainActivity.USER_STUDENT_TEACHER));
@@ -254,10 +293,18 @@ public class MyProfile extends Fragment implements  View.OnClickListener {
         tvTeacherStudent .setOnClickListener(this);
         imgProfile.setOnClickListener(this);
 
+        if ( !ref.getString(MainActivity.USER_STUDENT_TEACHER , "").equals("Teacher")){
+            RPRating.setVisibility(View.INVISIBLE);
+        }
+
         return v ;
-    } //onCreat
+    } //onCreate
 
-
+    private void dissmissPPD(boolean b) {
+        if (!b) {
+            MyProfile.this.PPD.dismiss();
+        }
+    }
 
 
     public  void reFullEditText (final EditText et ) {
@@ -327,15 +374,14 @@ public class MyProfile extends Fragment implements  View.OnClickListener {
 
                     PPD.dismiss();
 
-                    Toast.makeText(getActivity()  , "uploaded", Toast.LENGTH_LONG ).show();
-
                     System.out.println("uploded");
 
                     Picasso.get().load(dImgUri).into(imgProfile);
 
                     editor.putString("ImgURI" , dImgUri.toString()) ;
                     editor.putInt("stage" , MainActivity.TEACHER_DAY) ;
-                    editor.apply();
+                    FirebaseDatabase.getInstance().getReference().child("profile").child(ref.getString( MainActivity.USER_UID , "")).child("stage").setValue(MainActivity.TEACHER_DAY) ;
+                    editor.commit();
 
 
 
@@ -365,9 +411,17 @@ public class MyProfile extends Fragment implements  View.OnClickListener {
         }
 
         if( v.getId() == R.id.imgProfile ){
-
+            PPD.show();
             editor.putInt("stage" , 2304)   ;
-            editor.apply();
+            editor.commit();
+            FirebaseDatabase.getInstance().getReference().child("profile")
+                    .child(ref.getString(MainActivity.USER_UID , "")).child("stage").setValue(2304)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            PPD.dismiss();
+                        }
+                    }) ;
             chooseAndUploadImage();
         }
 
