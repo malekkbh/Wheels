@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.malekk.newdriver"
-    android:versionCode="1"
+    android:versionCode="2"
     android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="16"
-        android:targetSdkVersion="25" />
+        android:targetSdkVersion="26" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -68,6 +68,9 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
         <meta-data
+            android:name="android.support.VERSION"
+            android:value="26.1.0" />
+        <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data
@@ -126,10 +129,6 @@
                 <data android:scheme="@string/facebook_login_protocol_scheme" />
             </intent-filter>
         </activity>
-
-        <meta-data
-            android:name="android.support.VERSION"
-            android:value="25.4.0" />
         <!--
  FirebaseMessagingService performs security checks at runtime,
              no need for explicit permissions despite exported="true"
@@ -141,6 +140,16 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <provider
+            android:name="com.squareup.picasso.PicassoProvider"
+            android:authorities="com.malekk.newdriver.com.squareup.picasso"
+            android:exported="false" />
+        <provider
+            android:name="android.arch.lifecycle.LifecycleRuntimeTrojanProvider"
+            android:authorities="com.malekk.newdriver.lifecycle-trojan"
+            android:exported="false"
+            android:multiprocess="true" />
 
         <activity
             android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
@@ -220,15 +229,11 @@ Service handling Google Sign-In user revocation. For apps that do not integrate 
             android:authorities="com.malekk.newdriver.firebaseinitprovider"
             android:exported="false"
             android:initOrder="100" />
-        <provider
-            android:name="com.squareup.picasso.PicassoProvider"
-            android:authorities="com.malekk.newdriver.com.squareup.picasso"
-            android:exported="false" />
-        <provider
-            android:name="android.arch.lifecycle.LifecycleRuntimeTrojanProvider"
-            android:authorities="com.malekk.newdriver.lifecycle-trojan"
-            android:exported="false"
-            android:multiprocess="true" />
+
+        <meta-data
+            android:name="android.arch.lifecycle.VERSION"
+            android:value="27.0.0-SNAPSHOT" />
+
         <provider
             android:name="com.android.tools.ir.server.InstantRunContentProvider"
             android:authorities="com.malekk.newdriver.com.android.tools.ir.server.InstantRunContentProvider"
