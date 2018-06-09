@@ -8,7 +8,7 @@
             android:icon="@drawable/icons8_marker"
             android:title="Teaching Area" />
         <item
-            android:id="@+id/nav_my_classes"
+            android:id="@+id/nav_my_students"
             android:icon="@drawable/icons8_classroom"
             android:title="My classes" />
         <!--<item-->

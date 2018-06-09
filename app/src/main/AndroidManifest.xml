@@ -58,7 +58,8 @@
         <meta-data
             tools:replace="android:value"
             android:name="android.support.VERSION"
-            android:value="26.1.0" />
+            android:value=""
+             />
 
     </application>
 

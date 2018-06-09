@@ -30,7 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.malekk.newdriver.DataSorce.TeacherDayDataSorce;
 import com.malekk.newdriver.MainActivity;
-import com.malekk.newdriver.MyStudents;
+import layout.MyStudents;
 import com.malekk.newdriver.R;
 import com.malekk.newdriver.models.Day;
 import com.malekk.newdriver.models.Notification;
@@ -106,84 +106,11 @@ public class TeacherDayRecyclerAdapter extends  RecyclerView.Adapter<TeacherDayR
 
 
         initSwipe();
+
+        fillUpDayList( ref.getInt(MainActivity.USER_STAGE , 0));
         //initDialog();
      // final TeacherDayDataSorce today = new TeacherDayDataSorce(date) ;
 
-        today.getTeacherDay(new TeacherDayDataSorce.TeacherDayDataArrived() {
-            @Override
-            public void data(List<lesson> data) {
-                TeacherDayRecyclerAdapter.this.dayList = data;
-                TeacherDayRecyclerAdapter.this.notifyDataSetChanged();
-                System.out.println("**** +" + dayList.size());
-
-                if (context.getSharedPreferences("re" , Context.MODE_PRIVATE).getInt("mChange" , 0) == 2 && dayList.size() != 0 ){
-                    replaceStudents();
-                }
-
-                if ( dayList.size() == 0 ){
-                    today.getDayOfTheWeek(new TeacherDayDataSorce.DayOfTheWeekArrived() {
-                        @Override
-                        public void data(ScheduleDay dayData) {
-                            ScheduleDay newScheduleDay = new ScheduleDay();
-                            Day newDay  ;
-
-                            if (dayData != null ) {
-
-                                newScheduleDay = dayData;
-                                newDay = new Day(newScheduleDay , date) ;
-                                dayList = newDay.daySchedule;
-
-
-                            }
-
-                            else {
-
-                                if (teacherStudent.equals("Student")) {
-                                     message = "Please contact Your teacher" ;
-                                     title = "No Schedul for This Day !" ;
-                                }
-                                else
-                                {
-                                    message = "Please edit your Schedule , press 'OK' to edit " ;
-                                    title = "No Schedul for This Day !" ;
-                                }
-
-                                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                builder.setMessage(message)
-                                        .setTitle(title)
-                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                if (teacherStudent.equals("Teacher")) {
-                                                    FragmentActivity activity = (FragmentActivity) context;
-                                                    activity.getSupportFragmentManager().beginTransaction()
-                                                            .replace(R.id.container, new TeacherSchedule()).commit();
-                                                }
-                                            }
-                                        });
-
-                                AlertDialog dialog = builder.create();
-                                dialog.show();
-
-
-
-
-//                                newScheduleDay = new ScheduleDay("00:00", "00:00") ;
-//                                newDay = new Day(newScheduleDay , date);
-//                                dayList = newDay.daySchedule;  // WORKING !
-                            }
-
-                            TeacherDayRecyclerAdapter.this.notifyDataSetChanged();
-
-                            System.out.println("***** +" + dayList.size() + "day : " + newScheduleDay.toString() );
-                        }
-                    });
-
-
-
-                }//if
-            }
-        });
 
 //        if ( dayList.size() == 0 ){
 //            today.getDayOfTheWeek(new TeacherDayDataSorce.DayOfTheWeekArrived() {
@@ -198,7 +125,138 @@ public class TeacherDayRecyclerAdapter extends  RecyclerView.Adapter<TeacherDayR
 //                }
 //            });
 //        }
+        System.out.println("***** FUCK con' ");
     }//con'
+
+
+    public void fillUpDayList(final int stage){
+        today.getTeacherDay(new TeacherDayDataSorce.TeacherDayDataArrived() {
+            @Override
+            public void data(List<lesson> data) {
+                TeacherDayRecyclerAdapter.this.dayList = data;
+                TeacherDayRecyclerAdapter.this.notifyDataSetChanged();
+                System.out.println("**** +" + dayList.size());
+
+                if (context.getSharedPreferences("re" , Context.MODE_PRIVATE).getInt("mChange" , 0) == 2 && dayList.size() != 0 ){
+                    replaceStudents();
+                }
+
+                if ( dayList.size() == 0 ){
+
+                    ref.edit().putInt(MainActivity.USER_STAGE , 2301).commit() ;
+
+                    today.getDayOfTheWeek( context ,new TeacherDayDataSorce.DayOfTheWeekArrived() {
+                        @Override
+                        public void data(ScheduleDay dayData) {
+                            ScheduleDay newScheduleDay = new ScheduleDay();
+                            Day newDay  ;
+
+                            if (dayData != null ) {
+
+                                newScheduleDay = dayData;
+                                newDay = new Day(newScheduleDay , date) ;
+                                dayList = newDay.daySchedule;
+
+                                ref.edit().putInt(MainActivity.USER_STAGE , MainActivity.TEACHER_DAY).commit() ;
+
+
+                            }
+
+//                            else {
+//                                System.out.println("**********FUCK !!! NO DAY ");
+//                            }
+
+                            else {
+//                                if (teacherStudent.equals("Student")) {
+//                                    message = "Please contact Your teacher" ;
+//                                    title = "No Schedul for This Day !" ;
+//                                }
+//                                else
+//                                {
+//                                    message = "Please edit your Schedule , press 'OK' to edit " ;
+//                                    title = "No Schedul for This Day !" ;
+//                                }
+//
+//                                final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                                final AlertDialog dialogNoSchedule = builder.show();
+//
+//                                builder.setMessage(message)
+//                                        .setTitle(title)
+//                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                                            @Override
+//                                            public void onClick(DialogInterface dialog, int which) {
+//                                                if (teacherStudent.equals("Teacher") ) {
+//                                                    FragmentActivity activity = (FragmentActivity) context;
+//                                                    activity.getSupportFragmentManager().beginTransaction()
+//                                                            .replace(R.id.container, new TeacherSchedule()).commit();
+//                                                    dialogNoSchedule.dismiss();
+//                                                    //  ((FragmentActivity) context).finish();
+//                                                }
+//                                            }
+//                                        });
+//                                if( stage == MainActivity.TEACHER_DAY)
+//                                builder.show().show();
+
+                                if( stage == MainActivity.TEACHER_DAY)
+                                noSchedulDialog();
+
+                            }
+
+                            TeacherDayRecyclerAdapter.this.notifyDataSetChanged();
+
+                            System.out.println("***** +" + dayList.size() + "day : " + newScheduleDay.toString() );
+                        }
+                    });
+
+
+
+                }//if
+            }
+        });
+
+    }
+
+
+
+
+    public void noSchedulDialog() {
+
+//        final ProgressDialog pd = new ProgressDialog(context) ;
+//        pd.show();
+
+        if (teacherStudent.equals("Student")) {
+            message = "Please contact Your teacher" ;
+            title = "No Schedul for This Day !" ;
+        }
+        else
+        {
+            message = "Please edit your Schedule , press 'OK' to edit " ;
+            title = "No Schedul for This Day !" ;
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        builder.setMessage(message)
+                .setTitle(title)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (teacherStudent.equals("Teacher")) {
+                            FragmentActivity activity = (FragmentActivity) context;
+                            activity.getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.container, new TeacherSchedule()).commit();
+                           // pd.dismiss();
+                            dialog.dismiss();
+                           // ((FragmentActivity) context).finish();
+                        }
+                    }
+                });
+        final AlertDialog dialogNoSchedule = builder.show();
+
+        dialogNoSchedule.show();
+
+    }
+
 
     public  Bitmap drawableToBitmap (Drawable drawable) {
 
@@ -439,6 +497,10 @@ public class TeacherDayRecyclerAdapter extends  RecyclerView.Adapter<TeacherDayR
                 .child(String.valueOf(date.getDayOfMonth()))
                 .child(abc.toString())
                 .removeValue() ;
+        //remove lessone for this day if calss is taken
+        if (!abc.getStudentName().equals("free")){
+            FirebaseDatabase.getInstance().getReference().child("lessonsForThisDay").child(abc.getId()).child(date.toString("YYYY/M/d")).removeValue() ;
+        }
 
 
         abc.setStudentName("Teacher Break");
@@ -583,7 +645,7 @@ public class TeacherDayRecyclerAdapter extends  RecyclerView.Adapter<TeacherDayR
 
         TeacherDayRecyclerAdapter.this.notifyDataSetChanged();
 
-        FirebaseDatabase.getInstance().getReference().child("lessonsForThisDay").child(UID).child(date.toString("YYYY/M/d"))
+        FirebaseDatabase.getInstance().getReference().child("lessonsForThisDay").child(abc.getId()).child(date.toString("YYYY/M/d"))
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {

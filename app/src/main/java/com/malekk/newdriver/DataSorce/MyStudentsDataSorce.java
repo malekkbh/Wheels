@@ -32,7 +32,8 @@ public class MyStudentsDataSorce {
                             Profile profile = child.getValue(Profile.class);
 
                             if(profile.getTeacher() != null)
-                                if(profile.getTeacher().equals(FirebaseAuth.getInstance().getCurrentUser().getUid()))
+                                if(profile.getTeacher().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        && !profile.getuID().equals(profile.getTeacher()))
                                     profiles.add(profile);
                         }
                         listener.data(profiles);

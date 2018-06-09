@@ -4,24 +4,7 @@
             "outputFile": "/Users/malekkbh/Desktop/untitled folder/NewDriver/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sl/values-sl.xml",
             "map": [
                 {
-                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/play-services-base-11.0.4.aar/f7df190bcc51efa957d664a7bb53a17c/res/values-sl/values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
-                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-                        "startOffsets": "283,387,584,711,816,1022,1150,1279,1496,1601,1799,1927,2138,2316,2412,2500",
-                        "endColumns": "103,196,126,104,205,127,128,216,104,197,127,210,177,95,87,108",
-                        "endOffsets": "386,583,710,815,1021,1149,1278,1495,1600,1798,1926,2137,2315,2411,2499,2608"
-                    },
-                    "to": {
-                        "startLines": "22,23,24,25,26,27,28,30,31,32,33,34,35,36,37,38",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "2642,2750,2947,3078,3187,3393,3525,3857,4074,4183,4381,4513,4724,4906,5006,5098",
-                        "endColumns": "107,196,130,108,205,131,132,216,108,197,131,210,181,99,91,112",
-                        "endOffsets": "2745,2942,3073,3182,3388,3520,3653,4069,4178,4376,4508,4719,4901,5001,5093,5206"
-                    }
-                },
-                {
-                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-2.2.0.aar/51f2c2d49c2bef733b581fa11784c6ff/res/values-sl/values-sl.xml",
+                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-2.2.0.aar/b3fd2ecd4442635f1cef3d03d73d423b/res/values-sl/values-sl.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -38,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.0.4.aar/e91b4525bb3d2058d52dd291ee830c09/res/values-sl/values.xml",
+                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.0.4.aar/7aaabc3884d413f8041e872e07e0f1a7/res/values-sl/values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -55,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/17ee32cfcbd7fe81e91056a4d6690429/res/values-sl/values-sl.xml",
+                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/85654d67c100e854b6d6667c65bf2b41/res/values-sl/values-sl.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -69,6 +52,23 @@
                         "startOffsets": "672,779,887,1010,1117,1225,1312,1415,1534,1619,1703,1787,1895,2004,2104,2217,2324,2428,2545,15418,15501",
                         "endColumns": "106,107,122,106,107,86,102,118,84,83,83,107,108,99,112,106,103,116,96,82,100",
                         "endOffsets": "774,882,1005,1112,1220,1307,1410,1529,1614,1698,1782,1890,1999,2099,2212,2319,2423,2540,2637,15496,15597"
+                    }
+                },
+                {
+                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/play-services-base-11.0.4.aar/fb161af7988e951f2abb4a00268184ba/res/values-sl/values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
+                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+                        "startOffsets": "283,387,584,711,816,1022,1150,1279,1496,1601,1799,1927,2138,2316,2412,2500",
+                        "endColumns": "103,196,126,104,205,127,128,216,104,197,127,210,177,95,87,108",
+                        "endOffsets": "386,583,710,815,1021,1149,1278,1495,1600,1798,1926,2137,2315,2411,2499,2608"
+                    },
+                    "to": {
+                        "startLines": "22,23,24,25,26,27,28,30,31,32,33,34,35,36,37,38",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "2642,2750,2947,3078,3187,3393,3525,3857,4074,4183,4381,4513,4724,4906,5006,5098",
+                        "endColumns": "107,196,130,108,205,131,132,216,108,197,131,210,181,99,91,112",
+                        "endOffsets": "2745,2942,3073,3182,3388,3520,3653,4069,4178,4376,4508,4719,4901,5001,5093,5206"
                     }
                 }
             ]

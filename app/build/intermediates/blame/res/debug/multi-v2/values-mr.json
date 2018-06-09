@@ -4,7 +4,7 @@
             "outputFile": "/Users/malekkbh/Desktop/untitled folder/NewDriver/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-mr/values-mr.xml",
             "map": [
                 {
-                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/play-services-base-11.0.4.aar/f7df190bcc51efa957d664a7bb53a17c/res/values-mr/values.xml",
+                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/play-services-base-11.0.4.aar/fb161af7988e951f2abb4a00268184ba/res/values-mr/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-2.2.0.aar/51f2c2d49c2bef733b581fa11784c6ff/res/values-mr/values-mr.xml",
+                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-2.2.0.aar/b3fd2ecd4442635f1cef3d03d73d423b/res/values-mr/values-mr.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -38,24 +38,7 @@
                     }
                 },
                 {
-                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.0.4.aar/e91b4525bb3d2058d52dd291ee830c09/res/values-mr/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "285",
-                        "endColumns": "201",
-                        "endOffsets": "486"
-                    },
-                    "to": {
-                        "startLines": "29",
-                        "startColumns": "4",
-                        "startOffsets": "3405",
-                        "endColumns": "201",
-                        "endOffsets": "3602"
-                    }
-                },
-                {
-                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/17ee32cfcbd7fe81e91056a4d6690429/res/values-mr/values-mr.xml",
+                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/85654d67c100e854b6d6667c65bf2b41/res/values-mr/values-mr.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -69,6 +52,23 @@
                         "startOffsets": "437,555,663,786,892,999,1089,1190,1305,1382,1460,1540,1652,1754,1850,1959,2060,2175,2298,14853,14933",
                         "endColumns": "117,107,122,105,106,89,100,114,76,77,79,111,101,95,108,100,114,122,104,79,100",
                         "endOffsets": "550,658,781,887,994,1084,1185,1300,1377,1455,1535,1647,1749,1845,1954,2055,2170,2293,2398,14928,15029"
+                    }
+                },
+                {
+                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.0.4.aar/7aaabc3884d413f8041e872e07e0f1a7/res/values-mr/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "285",
+                        "endColumns": "201",
+                        "endOffsets": "486"
+                    },
+                    "to": {
+                        "startLines": "29",
+                        "startColumns": "4",
+                        "startOffsets": "3405",
+                        "endColumns": "201",
+                        "endOffsets": "3602"
                     }
                 }
             ]

@@ -10,6 +10,7 @@ import android.graphics.RectF;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -126,11 +127,13 @@ public class TeacherSchedule extends Fragment implements View.OnClickListener {
                         Schedule sch = null;
                         if (dataSnapshot.exists()){
                             sch = dataSnapshot.getValue(Schedule.class);
-                        }
+                            fillTP(sch);
 
-                        fillTP(sch);
+                            pd.dismiss();
+                        }else
+                            pd.dismiss();
 
-                        pd.dismiss();
+
                     }
 
                     @Override
@@ -162,6 +165,24 @@ public class TeacherSchedule extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View v) {
                 timePickerForSetAll();
+            }
+        });
+
+
+
+        v.setFocusableInTouchMode(true);
+        v.requestFocus();
+        v.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // Log.i(tag, "keyCode: " + keyCode);
+                if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                    //Log.i(tag, "onKey Back listener is working!!!");
+                    // getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    getFragmentManager().beginTransaction().replace(R.id.container , new TeacherDay()).commit() ;
+                    return true;
+                }
+                return false;
             }
         });
 

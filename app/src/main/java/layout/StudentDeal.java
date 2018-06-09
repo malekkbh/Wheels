@@ -2,7 +2,6 @@ package layout;
 
 
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,7 +15,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.request.animation.GlideAnimation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,10 +25,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.malekk.newdriver.MainActivity;
 import com.malekk.newdriver.R;
 import com.malekk.newdriver.models.Profile;
-
-import static android.R.attr.onClick;
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 /**
  * A simple {@link Fragment} subclass.

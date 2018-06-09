@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.malekk.newdriver"
-    android:versionCode="2"
+    android:versionCode="3"
     android:versionName="2" >
 
     <uses-sdk
@@ -30,6 +30,7 @@
         android:largeHeap="true"
         android:roundIcon="@drawable/notification_logo"
         android:supportsRtl="true"
+        android:testOnly="true"
         android:theme="@style/AppTheme.NoActionBar" >
         <activity
             android:name="com.malekk.newdriver.SplashScreen"
@@ -68,7 +69,7 @@
             android:resource="@array/preloaded_fonts" />
         <meta-data
             android:name="android.support.VERSION"
-            android:value="26.1.0" />
+            android:value="" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

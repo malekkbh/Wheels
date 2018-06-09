@@ -1,8 +1,12 @@
 package com.malekk.newdriver.DataSorce;
 
 import android.app.Application;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -12,6 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.malekk.newdriver.MainActivity;
+import com.malekk.newdriver.R;
 import com.malekk.newdriver.models.ScheduleDay;
 import com.malekk.newdriver.models.lesson;
 
@@ -20,6 +25,8 @@ import org.joda.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import layout.TeacherSchedule;
 
 import static android.app.PendingIntent.getActivity;
 
@@ -35,6 +42,9 @@ public class TeacherDayDataSorce extends Application {
     static String dayText ;
     static String studentTeacher ;
     static String teacherID ;
+    static Context context ;
+    int c ;
+
 
     Context applicationContext = MainActivity.getContextOfApplication();
     SharedPreferences ref = applicationContext.getSharedPreferences("USER_INFO" , 0) ;
@@ -50,6 +60,8 @@ public class TeacherDayDataSorce extends Application {
 
         this.studentTeacher = ref.getString("StudentTeacher" , "");
         this.teacherID = ref.getString("Teacher" , "") ;
+
+        this.c = 0 ;
 
     }
 
@@ -119,14 +131,62 @@ public class TeacherDayDataSorce extends Application {
 
     }//getTeacher
 
-    public static void getDayOfTheWeek (final DayOfTheWeekArrived dayListener ){
-
+    public static void getDayOfTheWeek (Context context1 , final DayOfTheWeekArrived dayListener ){
+        context = context1 ;
         FirebaseDatabase.getInstance().getReference().child("teacherSchedule").child(teacherID).child(dayText).
                 addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        ScheduleDay newDay = dataSnapshot.getValue(ScheduleDay.class) ;
-                        dayListener.data(newDay);
+                        if(dataSnapshot.exists()) {
+                            ScheduleDay newDay = dataSnapshot.getValue(ScheduleDay.class);
+                            dayListener.data(newDay);
+                        }
+
+                        else dayListener.data(null);
+//                        else{
+//
+//                            String message , title ;
+//
+//
+//
+//                            if (studentTeacher.equals("Student")) {
+//                                message = "Please contact Your teacher" ;
+//                                title = "No Schedul for This Day !" ;
+//                            }
+//                            else
+//                            {
+//                                message = "Please edit your Schedule , press 'OK' to edit " ;
+//                                title = "No Schedul for This Day !" ;
+//                            }
+//
+//                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//
+//                            builder.setMessage(message)
+//                                    .setTitle(title)
+//                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(DialogInterface d, int which) {
+//                                            if (studentTeacher.equals("Teacher") ) {
+//                                                FragmentActivity activity = (FragmentActivity) context;
+//                                                activity.getSupportFragmentManager().beginTransaction()
+//                                                        .replace(R.id.container, new TeacherSchedule()).commit();
+//                                                // dialogNoSchedule.dismiss();
+//                                                // ((FragmentActivity) context).finish();
+//                                                d.dismiss();
+//                                            }
+//                                        }
+//                                    });
+//                            final AlertDialog dialogNoSchedule = builder.show();
+//
+//                            dialogNoSchedule.show();
+//
+//                            return;
+//
+//
+//
+//
+//                        }
+
                     }
 
                     @Override
@@ -135,6 +195,49 @@ public class TeacherDayDataSorce extends Application {
                     }
                 });
     }
+
+
+
+
+    public void noSchedulDialog() {
+
+       final String teacherStudent = applicationContext.getSharedPreferences("USER_INFO" , 0).getString(MainActivity.USER_STUDENT_TEACHER , "") ;
+        String message , title ;
+
+
+
+        if (teacherStudent.equals("Student")) {
+            message = "Please contact Your teacher" ;
+            title = "No Schedul for This Day !" ;
+        }
+        else
+        {
+            message = "Please edit your Schedule , press 'OK' to edit " ;
+            title = "No Schedul for This Day !" ;
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        builder.setMessage(message)
+                .setTitle(title)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (teacherStudent.equals("Teacher")) {
+                            FragmentActivity activity = (FragmentActivity) context;
+                            activity.getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.container, new TeacherSchedule()).commit();
+                            // dialogNoSchedule.dismiss();
+                            // ((FragmentActivity) context).finish();
+                        }
+                    }
+                });
+        final AlertDialog dialogNoSchedule = builder.show();
+
+        dialogNoSchedule.show();
+
+    }
+
 
 
 }

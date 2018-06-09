@@ -4,7 +4,7 @@
             "outputFile": "/Users/malekkbh/Desktop/untitled folder/NewDriver/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v26/values-v26.xml",
             "map": [
                 {
-                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/4d8a530ba92d12026c2d028f9a0eeba6/res/values-v26/values-v26.xml",
+                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/95eea6bf1485851b2395143ea34aaf00/res/values-v26/values-v26.xml",
                     "from": {
                         "startLines": "2,6",
                         "startColumns": "4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/17ee32cfcbd7fe81e91056a4d6690429/res/values-v26/values-v26.xml",
+                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/85654d67c100e854b6d6667c65bf2b41/res/values-v26/values-v26.xml",
                     "from": {
                         "startLines": "2,3,4,8,12,16",
                         "startColumns": "4,4,4,4,4,4",

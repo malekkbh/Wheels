@@ -4,7 +4,24 @@
             "outputFile": "/Users/malekkbh/Desktop/untitled folder/NewDriver/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-el/values-el.xml",
             "map": [
                 {
-                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/play-services-base-11.0.4.aar/f7df190bcc51efa957d664a7bb53a17c/res/values-el/values.xml",
+                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/85654d67c100e854b6d6667c65bf2b41/res/values-el/values-el.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,173,281,404,515,632,717,822,948,1036,1122,1207,1318,1428,1530,1641,1750,1858,1981,2081,2166",
+                        "endColumns": "117,107,122,110,116,84,104,125,87,85,84,110,109,101,110,108,107,122,99,84,100",
+                        "endOffsets": "168,276,399,510,627,712,817,943,1031,1117,1202,1313,1423,1525,1636,1745,1853,1976,2076,2161,2262"
+                    },
+                    "to": {
+                        "startLines": "3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,107,108",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "535,653,761,884,995,1112,1197,1302,1428,1516,1602,1687,1798,1908,2010,2121,2230,2338,2461,15837,15922",
+                        "endColumns": "117,107,122,110,116,84,104,125,87,85,84,110,109,101,110,108,107,122,99,84,100",
+                        "endOffsets": "648,756,879,990,1107,1192,1297,1423,1511,1597,1682,1793,1903,2005,2116,2225,2333,2456,2556,15917,16018"
+                    }
+                },
+                {
+                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/play-services-base-11.0.4.aar/fb161af7988e951f2abb4a00268184ba/res/values-el/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -21,24 +38,7 @@
                     }
                 },
                 {
-                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.0.4.aar/e91b4525bb3d2058d52dd291ee830c09/res/values-el/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "285",
-                        "endColumns": "222",
-                        "endOffsets": "507"
-                    },
-                    "to": {
-                        "startLines": "29",
-                        "startColumns": "4",
-                        "startOffsets": "3640",
-                        "endColumns": "222",
-                        "endOffsets": "3858"
-                    }
-                },
-                {
-                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-2.2.0.aar/51f2c2d49c2bef733b581fa11784c6ff/res/values-el/values-el.xml",
+                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-2.2.0.aar/b3fd2ecd4442635f1cef3d03d73d423b/res/values-el/values-el.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -55,20 +55,20 @@
                     }
                 },
                 {
-                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/17ee32cfcbd7fe81e91056a4d6690429/res/values-el/values-el.xml",
+                    "source": "/Users/malekkbh/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.0.4.aar/7aaabc3884d413f8041e872e07e0f1a7/res/values-el/values.xml",
                     "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,173,281,404,515,632,717,822,948,1036,1122,1207,1318,1428,1530,1641,1750,1858,1981,2081,2166",
-                        "endColumns": "117,107,122,110,116,84,104,125,87,85,84,110,109,101,110,108,107,122,99,84,100",
-                        "endOffsets": "168,276,399,510,627,712,817,943,1031,1117,1202,1313,1423,1525,1636,1745,1853,1976,2076,2161,2262"
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "285",
+                        "endColumns": "222",
+                        "endOffsets": "507"
                     },
                     "to": {
-                        "startLines": "3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,107,108",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "535,653,761,884,995,1112,1197,1302,1428,1516,1602,1687,1798,1908,2010,2121,2230,2338,2461,15837,15922",
-                        "endColumns": "117,107,122,110,116,84,104,125,87,85,84,110,109,101,110,108,107,122,99,84,100",
-                        "endOffsets": "648,756,879,990,1107,1192,1297,1423,1511,1597,1682,1793,1903,2005,2116,2225,2333,2456,2556,15917,16018"
+                        "startLines": "29",
+                        "startColumns": "4",
+                        "startOffsets": "3640",
+                        "endColumns": "222",
+                        "endOffsets": "3858"
                     }
                 }
             ]

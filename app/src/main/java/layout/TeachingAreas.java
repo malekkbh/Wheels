@@ -18,6 +18,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -180,6 +181,23 @@ public class TeachingAreas extends Fragment {
 
                 //builder.show().show();
 
+            }
+        });
+
+
+        v.setFocusableInTouchMode(true);
+        v.requestFocus();
+        v.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // Log.i(tag, "keyCode: " + keyCode);
+                if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                    //Log.i(tag, "onKey Back listener is working!!!");
+                    // getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    getFragmentManager().beginTransaction().replace(R.id.container , new TeacherDay()).commit() ;
+                    return true;
+                }
+                return false;
             }
         });
 

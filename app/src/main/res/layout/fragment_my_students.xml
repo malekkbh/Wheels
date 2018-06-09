@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.malekk.newdriver.MyStudents">
+    tools:context="com.malekk.newdriver.layout.MyStudents">
 
     <!-- TODO: Update blank fragment layout -->
 

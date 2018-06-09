@@ -1194,7 +1194,7 @@ int id name 0x7f0a00c8
 int id name_layout 0x7f0a00c9
 int id nav_Teaching_Area 0x7f0a00ca
 int id nav_manage 0x7f0a00cb
-int id nav_my_classes 0x7f0a00cc
+int id nav_my_students 0x7f0a00cc
 int id nav_profile 0x7f0a00cd
 int id nav_send 0x7f0a00ce
 int id nav_share 0x7f0a00cf

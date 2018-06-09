@@ -2,14 +2,10 @@ package com.malekk.newdriver;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,11 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,20 +30,16 @@ import com.malekk.newdriver.models.Profile;
 
 import java.util.Arrays;
 
-import layout.AppIntro;
 import layout.MyProfile;
-import layout.StudentMain;
+import layout.MyStudents;
 import layout.StudentSingUp;
 import layout.StudentTeacher;
 import layout.TeacherDay;
-import layout.TeacherMain;
 import layout.TeacherProfessionalInfo;
 import layout.TeacherSchedule;
 import layout.TeacherSingUp;
 import layout.Teachers;
 import layout.TeachingAreas;
-
-import static com.malekk.newdriver.R.menu.activity_main_drawer;
 
 //import layout.SignUp;
 
@@ -151,7 +141,21 @@ public class MainActivity extends AppCompatActivity
 
 
         etNavName.setText(sharedPref_USER_INFO.getString(USER_NAME, ""));
+        etNavName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyProfile()).commit();
+            }
+        });
+
         etNavStudentTeacher.setText(sharedPref_USER_INFO.getString(USER_STUDENT_TEACHER ,""));
+        etNavStudentTeacher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyProfile()).commit();
+
+            }
+        });
 
         Menu menu = navigationView.getMenu() ;
 
@@ -163,13 +167,13 @@ public class MainActivity extends AppCompatActivity
             TD.setTitle("My Day");
             menu.findItem(R.id.nav_teacher_scedule).setVisible(true) ;
             menu.findItem(R.id.nav_Teaching_Area).setVisible(true) ;
-            menu.findItem(R.id.nav_my_classes).setVisible(true).setTitle("My Students");
+            menu.findItem(R.id.nav_my_students).setVisible(true).setTitle("My Students");
         }//ifTeacher
         else
         {
             menu.findItem(R.id.nav_teacher_scedule).setVisible(false) ;
             menu.findItem(R.id.nav_Teaching_Area).setVisible(false) ;
-            menu.findItem(R.id.nav_my_classes).setVisible(false);
+            menu.findItem(R.id.nav_my_students).setVisible(false);
 
             TD.setTitle("Sign up for calss") ;
         }//ifStudent
@@ -179,6 +183,7 @@ public class MainActivity extends AppCompatActivity
     }//onCreate
 
     public void refreshSharedPref() {
+        System.out.println("FUCK refreshRef!!! ");
         if( FirebaseAuth.getInstance().getCurrentUser() != null)
         FirebaseDatabase.getInstance().getReference().child("profile").child(mUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -352,8 +357,10 @@ public class MainActivity extends AppCompatActivity
 
             }//if user == null
             else{
-                if(sharedPref_USER_INFO.getInt(USER_STAGE , 0 ) == TEACHER_DAY )
-                refreshSharedPref();
+                if(sharedPref_USER_INFO.getInt(USER_STAGE , 0 ) == STUDENT_TEACHER )
+                    initWithUser();
+              //  refreshSharedPref();
+
             }
 
         }
@@ -396,7 +403,7 @@ public class MainActivity extends AppCompatActivity
 
 
     public void initWithUser() {
-
+        System.out.println("FUCK initUSER");
         System.out.println("USER: " + sharedPref_USER_INFO.getInt("stage" , 0));
         Log.d("user" , String.valueOf(sharedPref_USER_INFO.getInt("stage" , 0))) ;
 
@@ -498,6 +505,10 @@ public class MainActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_profile){
             getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyProfile()).commit();
+        }
+
+        else if (id == R.id.nav_my_students){
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyStudents()).commit();
         }
 
         else if (id == R.id.nav_share) {
