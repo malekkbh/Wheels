@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sat Jun 09 01:42:01 IDT 2018
+#Sat Jun 09 08:45:43 IDT 2018
 0.baseType=DIRECTORY
 0.base=/Users/malekkbh/Desktop/untitled folder/NewDriver/app/build/intermediates/assets/debug
 0.path=crashlytics-build.properties

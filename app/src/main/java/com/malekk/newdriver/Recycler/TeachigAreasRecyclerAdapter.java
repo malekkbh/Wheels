@@ -48,6 +48,8 @@ public class TeachigAreasRecyclerAdapter extends RecyclerView.Adapter<TeachigAre
             @Override
             public void data(List<City> data) {
                 TeachigAreasRecyclerAdapter.this.cityList = data ;
+
+
                 TeachigAreasRecyclerAdapter.this.notifyDataSetChanged();
             }
         });
