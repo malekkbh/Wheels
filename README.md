@@ -1,6 +1,8 @@
 <h1>“Wheels” </h1>
-
+<h3>
  the App is made for Driving Teachers and there students, the students can enter the app and sign there selves for the lessons by a schedule that made by the teacher.
+ </h3>
+
  <br>
 •	 Multiple users : Teacher , Student(s) . The teacher is allowed to change or even cancel a lesson  Student can’t see an reserved lesson , it will be marked as ‘taken’ , every Student see Only his teacher’s schedule .
 <br>
