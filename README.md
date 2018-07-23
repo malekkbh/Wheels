@@ -1,12 +1,12 @@
 <h1>“Wheels” </h1>
 <h3>
- the App is made for Driving Teachers and there students, the students can enter the app and sign there selves for the lessons by a schedule that made by the teacher.
+ The App is made for Driving Teachers and their Students, the Students can enter the app and sign themselves for the lessons by a schedule that’s been made by the teacher.
  </h3>
 
-•	 Multiple users : Teacher , Student(s) . The teacher is allowed to change or even cancel a lesson  Student can’t see an reserved lesson , it will be marked as ‘taken’ , every Student see Only his teacher’s schedule .
+•	 Multiple users: Teacher, Student(s). The Teacher is allowed to change or even cancel a lesson, students can’t see a reserved lesson, it will be marked as “taken”, and every student can see only his teacher’s schedule.
 <br><br>
-•	 User Auth : every user have username and password 
+•	 User Auth: every user has a username and password.
 <br><br>
-•	 Device to device Notifications :Teacher receive a notification every time a Student set a lesson for himself , although , the Student get a notification if the Teacher have done any changes on his scheduled lesson.
+•	 Device to Device Notifications: the Teacher receives a notification every time a Student sets a lesson for himself, also the Student gets a notification if the Teacher has done any changes on his scheduled lesson.
 <br><br>
-•	 The app is managed thru Firebase Database ( NoSQL). 
+•	 The app is managed through Firebase Database (NoSQL) .
